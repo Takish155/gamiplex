@@ -9,7 +9,7 @@ import { Metadata } from "next";
 const page = async ({ params }: { params: { query: string } }) => {
   const data = await getMovie(1, "", "", "", params.query);
 
-  if (!data) return <div>loading...</div>;
+  if (!data) return;
   return (
     <LoadMoreSearchContextProvider>
       <LoadMainComponent

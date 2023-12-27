@@ -7,7 +7,7 @@ import { Metadata } from "next";
 export default async function Home() {
   const data = await getMovie(1, "");
 
-  if (!data) return <div>loading...</div>;
+  if (!data) return;
 
   return (
     <LoadMoreHomeContextProvider>

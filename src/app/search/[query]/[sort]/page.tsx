@@ -15,7 +15,7 @@ const page = async ({
   const data = await getMovie(1, params.sort as Genres, "", "", params.query);
 
   if (!data) {
-    return <div>loading...</div>;
+    return;
   }
 
   return (
