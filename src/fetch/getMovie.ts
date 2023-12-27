@@ -1,6 +1,5 @@
 import { Genres, InfiniteResponseData } from "@/types/reponseDataType";
 import axios from "axios";
-import { env } from "process";
 
 export const getMovie = async (
   page: number,
@@ -11,7 +10,7 @@ export const getMovie = async (
 ) => {
   try {
     const response = await axios.get<InfiniteResponseData>(
-      `${process.env.URL}/api/rawg/games`,
+      `${process.env.NEXT_PUBLIC_URL}/api/rawg/games`,
       {
         params: {
           type: type,

@@ -3,7 +3,7 @@ import axios from "axios";
 
 const getGameInfo = async (id: string) => {
   const response = await axios.get<FetchGameInfoType>(
-    `${process.env.URL}/api/rawg/info/${id}`
+    `${process.env.NEXT_PUBLIC_URL}/api/rawg/info/${id}`
   );
 
   return response.data;

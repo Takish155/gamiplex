@@ -9,13 +9,7 @@ import {
 import React, { useEffect, useState } from "react";
 import GameSection from "./GameSection";
 import { useInView } from "react-intersection-observer";
-import {
-  Box,
-  Button,
-  CircularProgress,
-  SxProps,
-  useTheme,
-} from "@mui/material";
+import { Box, Button, CircularProgress, SxProps } from "@mui/material";
 
 const InfiniteScrollComponent = ({
   data,
@@ -39,7 +33,6 @@ const InfiniteScrollComponent = ({
 }) => {
   const [loadMore, setLoadMore] = useState(false);
   const { ref, inView } = useInView();
-  const theme = useTheme();
 
   useEffect(() => {
     if (inView && fetchNextPage && loadMore) {
