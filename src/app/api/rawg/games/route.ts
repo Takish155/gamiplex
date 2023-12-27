@@ -9,13 +9,7 @@ export async function GET(request: NextRequest) {
   const type = request.nextUrl.searchParams.get("type");
 
   try {
-    const data = await fetchGames(
-      parseInt(pageNumber!),
-      genre,
-      query,
-      sort,
-      type
-    );
+    const data = await fetchGames(pageNumber, genre, query, sort, type);
     return NextResponse.json({ response: data }, { status: 200 });
   } catch (err) {
     return NextResponse.json({ error: "Response failed!" }, { status: 400 });

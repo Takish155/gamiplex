@@ -7,6 +7,10 @@ import React from "react";
 const LoadMoreDiscoverSection = () => {
   const { data, isLoading, isFetchingNextPage, fetchNextPage } =
     useLoadMoreDiscover();
+
+  if (!data || !fetchNextPage || data.pages.includes(undefined))
+    return <div>loading...</div>;
+
   return (
     <InfiniteScrollComponent
       data={data}

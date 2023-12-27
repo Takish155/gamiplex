@@ -11,6 +11,6 @@ export const fetchGenres = async () => {
 
     return response.data;
   } catch (err) {
-    throw new Error((err as Error).message.toString());
+    console.error((err as Error).message.toString());
   }
 };

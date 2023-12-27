@@ -23,13 +23,13 @@ const InfiniteScrollComponent = ({
   isFetchingNextPage,
   isLoading,
 }: {
-  data: InfiniteData<InfiniteResponseData, unknown> | undefined;
+  data: InfiniteData<InfiniteResponseData | undefined, unknown> | undefined;
   fetchNextPage:
     | ((
         options?: FetchNextPageOptions | undefined
       ) => Promise<
         InfiniteQueryObserverResult<
-          InfiniteData<InfiniteResponseData, unknown>,
+          InfiniteData<InfiniteResponseData | undefined, unknown>,
           Error
         >
       >)
@@ -69,7 +69,7 @@ const InfiniteScrollComponent = ({
         data?.pages.map((data, index) => {
           return (
             <React.Fragment key={index}>
-              {data.response.results.map((games, index) => {
+              {data?.response.results.map((games, index) => {
                 return <GameSection data={games} key={index} />;
               })}
             </React.Fragment>

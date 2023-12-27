@@ -9,6 +9,10 @@ import { Metadata } from "next";
 const page = async ({ params }: { params: { id: string } }) => {
   const data = await getMovie(1, "", params.id, "getByGenres");
 
+  if (!data) {
+    return <div>loading...</div>;
+  }
+
   return (
     <LoadMoreDiscoverContextProvider>
       <LoadMainComponent

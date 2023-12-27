@@ -15,6 +15,8 @@ const page = async ({ params }: { params: { id: string; sort: string } }) => {
     "getByGenres"
   );
 
+  if (!data) return <div>loading...</div>;
+
   return (
     <LoadMoreDiscoverContextProvider>
       <LoadMainComponent

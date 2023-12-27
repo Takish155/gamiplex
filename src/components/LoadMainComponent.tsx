@@ -13,6 +13,9 @@ const LoadMainComponent = ({
   LoadMoreComponent: React.ComponentType;
   SortingComponent?: React.ComponentType;
 }) => {
+  if (!data) {
+    return <p>Error, something went wrong....</p>;
+  }
   return (
     <Box component="main" sx={mainStyle}>
       {SortingComponent && <SortingComponent />}

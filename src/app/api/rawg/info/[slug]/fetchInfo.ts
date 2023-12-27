@@ -26,7 +26,7 @@ const fetchInfo = async (params: string) => {
       gameInfoResponse: gameInfoResponse.data,
     };
   } catch (error) {
-    throw new Error((error as Error).message.toString());
+    console.error((error as Error).message.toString());
   }
 };
 

@@ -6,7 +6,7 @@ import {
 import { InfiniteResponseData } from "./reponseDataType";
 
 export type UseLoadMoreHomeType = {
-  data: InfiniteData<InfiniteResponseData, unknown> | undefined;
+  data: InfiniteData<InfiniteResponseData | undefined, unknown> | undefined;
   isLoading: boolean;
   isError: boolean;
   isFetchingNextPage: boolean;
@@ -14,7 +14,7 @@ export type UseLoadMoreHomeType = {
     options?: FetchNextPageOptions | undefined
   ) => Promise<
     InfiniteQueryObserverResult<
-      InfiniteData<InfiniteResponseData, unknown>,
+      InfiniteData<InfiniteResponseData | undefined, unknown>,
       Error
     >
   >;

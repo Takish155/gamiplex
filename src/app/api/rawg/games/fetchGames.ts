@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const fetchGames = async (
-  pageNumber: number | null,
+  pageNumber: string | null,
   genre: string | null,
   query: string | null,
   sort: string | null,
@@ -35,6 +35,6 @@ export const fetchGames = async (
     });
     return response.data;
   } catch (err) {
-    throw new Error((err as Error).message.toString());
+    console.log((err as Error).message.toString());
   }
 };
