@@ -23,7 +23,7 @@ const GamePage = async ({ params }: { params: { id: string } }) => {
       {data.response.gameInfoResponse.movies_count !== 0 ? (
         <>
           <Box sx={articleStyles} component="article">
-            <TrailerSection />
+            <TrailerSection data={data} />
             <QuickDetails data={data} />
           </Box>
           <Box sx={sectionStyles} component="section">

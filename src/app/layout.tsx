@@ -31,7 +31,7 @@ export default function RootLayout({
           <QueryProvider>
             <Header />
             {children}
-            {/* <SpeedInsights /> */}
+            <SpeedInsights />
           </QueryProvider>
         </body>
       </html>
