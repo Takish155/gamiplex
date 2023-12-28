@@ -9,8 +9,8 @@ import { Metadata } from "next";
 const page = async ({ params }: { params: { id: string } }) => {
   const data = await getMovie(1, "", params.id, "getByGenres");
 
-  if (!data) {
-    return;
+  if (data?.response.results.length === 0 || !data) {
+    throw new Error("hi");
   }
 
   return (

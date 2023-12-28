@@ -8,7 +8,7 @@ const LoadMoreDiscoverSection = () => {
   const { data, isLoading, isFetchingNextPage, fetchNextPage } =
     useLoadMoreDiscover();
 
-  if (!data || !fetchNextPage || data.pages.includes(undefined)) return;
+  if (!data || !fetchNextPage) return;
 
   return (
     <InfiniteScrollComponent

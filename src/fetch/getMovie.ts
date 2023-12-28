@@ -1,5 +1,5 @@
 import { Genres, InfiniteResponseData } from "@/types/reponseDataType";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 
 export const getMovie = async (
   page: number,
@@ -23,7 +23,7 @@ export const getMovie = async (
     );
     return response.data;
   } catch (err) {
-    console.error((err as Error).message.toString());
+    console.error(err);
   }
 };
 

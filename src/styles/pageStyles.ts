@@ -16,3 +16,18 @@ export const gameArticleStyle: SxProps = {
   alignItems: "center",
   marginBottom: "3.5rem",
 };
+
+export const errorPageStyle: SxProps = {
+  width: "100vw",
+  height: "100vh",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+};
+
+export const noMorePageToBeLoadedStyle: SxProps = {
+  width: "100vw",
+  textAlign: "center",
+  fontSize: "1.5rem",
+  marginTop: "2rem",
+};

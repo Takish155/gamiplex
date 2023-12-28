@@ -2,9 +2,10 @@
 
 import React from "react";
 import GameSection from "./GameSection";
-import { Box, Button, Skeleton, SxProps } from "@mui/material";
+import { Box, Button, Skeleton, Typography } from "@mui/material";
 import { InfiniteScrollComponentProp } from "@/types/tanstackQueryTypes";
 import useInfiniteScrollComponent from "@/hooks/useInfiniteScrollComponent";
+import { noMorePageToBeLoadedStyle } from "@/styles/pageStyles";
 
 const InfiniteScrollComponent = ({
   data,
@@ -19,12 +20,22 @@ const InfiniteScrollComponent = ({
     loadMore,
     setLoadMore,
     skeletonMapper,
+    showLoadComponent,
+    setShowLoadComponent,
   } = useInfiniteScrollComponent(fetchNextPage);
 
   return (
     <>
       {loadMore &&
         data?.pages.map((data, index) => {
+          if (!data || !data.response) {
+            showLoadComponent && setShowLoadComponent(false);
+            return;
+          }
+          if (!data.response.results) {
+            showLoadComponent && setShowLoadComponent(false);
+            return;
+          }
           return (
             <React.Fragment key={index}>
               {data?.response.results.map((games, index) => {
@@ -35,7 +46,13 @@ const InfiniteScrollComponent = ({
         })}
 
       {loadMore ? (
-        <Box ref={ref}></Box>
+        showLoadComponent ? (
+          <Box ref={ref} id="loadMoreComponent"></Box>
+        ) : (
+          <Typography sx={noMorePageToBeLoadedStyle}>
+            No more page available...
+          </Typography>
+        )
       ) : (
         <Box sx={loadMoreButtonDivStyle}>
           <Button

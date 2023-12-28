@@ -22,6 +22,7 @@ const useInfiniteScrollComponent = (
 ) => {
   const [loadMore, setLoadMore] = useState(false);
   const { ref, inView } = useInView();
+  const [showLoadComponent, setShowLoadComponent] = useState(true);
 
   useEffect(() => {
     if (inView && fetchNextPage && loadMore) {
@@ -47,6 +48,8 @@ const useInfiniteScrollComponent = (
     loadMore,
     setLoadMore,
     skeletonMapper,
+    showLoadComponent,
+    setShowLoadComponent,
   };
 };
 
