@@ -31,31 +31,37 @@ const RequirementsComponent = ({
       <Box>
         <Box sx={requirementDivStyle}>
           <Typography sx={infoHeadingStyle}>OS</Typography>
-          <Typography sx={infoParagraphStyle}>{data.os ?? "~"}</Typography>
+          <Typography sx={infoParagraphStyle}>
+            {data.os ?? "Unknown"}
+          </Typography>
         </Box>
         <Divider component="div" sx={infoDividerStyle} />
         <Box sx={requirementDivStyle}>
           <Typography sx={infoHeadingStyle}>Processor</Typography>
           <Typography sx={infoParagraphStyle}>
-            {data.processor ?? "~"}
+            {data.processor ?? "Unknown"}
           </Typography>
         </Box>
         <Divider component="div" sx={infoDividerStyle} />
         <Box sx={requirementDivStyle}>
           <Typography sx={infoHeadingStyle}>Graphics</Typography>
           <Typography sx={infoParagraphStyle}>
-            {data.graphics ?? "~"}
+            {data.graphics ?? "Unknown"}
           </Typography>
         </Box>
         <Divider component="div" sx={infoDividerStyle} />
         <Box sx={requirementDivStyle}>
           <Typography sx={infoHeadingStyle}>Memory Ram</Typography>
-          <Typography sx={infoParagraphStyle}>{data.memory ?? "~"}</Typography>
+          <Typography sx={infoParagraphStyle}>
+            {data.memory ?? "Unknown"}
+          </Typography>
         </Box>
         <Divider component="div" sx={infoDividerStyle} />
         <Box sx={requirementDivStyle}>
           <Typography sx={infoHeadingStyle}>Storage</Typography>
-          <Typography sx={infoParagraphStyle}>{data.storage ?? "~"}</Typography>
+          <Typography sx={infoParagraphStyle}>
+            {data.storage ?? "Unknown"}
+          </Typography>
         </Box>
       </Box>
     </Box>

@@ -1,60 +1,25 @@
 "use client";
 
-import { InfiniteResponseData } from "@/types/reponseDataType";
-import {
-  FetchNextPageOptions,
-  InfiniteData,
-  InfiniteQueryObserverResult,
-} from "@tanstack/react-query";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import GameSection from "./GameSection";
-import { useInView } from "react-intersection-observer";
-import { Box, Button, CircularProgress, SxProps } from "@mui/material";
+import { Box, Button, Skeleton, SxProps } from "@mui/material";
+import { InfiniteScrollComponentProp } from "@/types/tanstackQueryTypes";
+import useInfiniteScrollComponent from "@/hooks/useInfiniteScrollComponent";
 
 const InfiniteScrollComponent = ({
   data,
   fetchNextPage,
   isFetchingNextPage,
   isLoading,
-}: {
-  data: InfiniteData<InfiniteResponseData | undefined, unknown> | undefined;
-  fetchNextPage:
-    | ((
-        options?: FetchNextPageOptions | undefined
-      ) => Promise<
-        InfiniteQueryObserverResult<
-          InfiniteData<InfiniteResponseData | undefined, unknown>,
-          Error
-        >
-      >)
-    | undefined;
-  isFetchingNextPage: boolean | undefined;
-  isLoading: boolean | undefined;
-}) => {
-  const [loadMore, setLoadMore] = useState(false);
-  const { ref, inView } = useInView();
-
-  useEffect(() => {
-    if (inView && fetchNextPage && loadMore) {
-      fetchNextPage();
-    }
-  }, [inView, fetchNextPage, loadMore]);
-
-  const loadMoreButtonDivStyle: SxProps = {
-    display: "flex",
-    justifyContent: "center",
-    width: "100vw",
-  };
-
-  const loadMoreButtonStyle: SxProps = {
-    width: "10rem",
-  };
-
-  const loadingContainerStyle: SxProps = {
-    width: "100vw",
-    display: "flex",
-    justifyContent: "center",
-  };
+}: InfiniteScrollComponentProp) => {
+  const {
+    loadMoreButtonDivStyle,
+    loadMoreButtonStyle,
+    ref,
+    loadMore,
+    setLoadMore,
+    skeletonMapper,
+  } = useInfiniteScrollComponent(fetchNextPage);
 
   return (
     <>
@@ -70,7 +35,7 @@ const InfiniteScrollComponent = ({
         })}
 
       {loadMore ? (
-        <Box ref={ref} sx={{ width: "100vw" }}></Box>
+        <Box ref={ref}></Box>
       ) : (
         <Box sx={loadMoreButtonDivStyle}>
           <Button
@@ -89,11 +54,16 @@ const InfiniteScrollComponent = ({
       )}
 
       {isLoading ||
-        (isFetchingNextPage && (
-          <Box sx={loadingContainerStyle}>
-            <CircularProgress />
-          </Box>
-        ))}
+        (isFetchingNextPage &&
+          skeletonMapper.map((key) => (
+            <Skeleton
+              key={key}
+              width={280}
+              height={350}
+              variant="rectangular"
+              sx={{ borderRadius: "1.5rem" }}
+            />
+          )))}
     </>
   );
 };

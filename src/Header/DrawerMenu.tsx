@@ -2,7 +2,13 @@
 
 import React from "react";
 import MenuIcon from "@mui/icons-material/Menu";
-import { Drawer, List, ListItem, ListItemButton } from "@mui/material";
+import {
+  Drawer,
+  IconButton,
+  List,
+  ListItem,
+  ListItemButton,
+} from "@mui/material";
 import { useGetGenres } from "@/hooks/useGetGenres";
 import { useRouter } from "next/navigation";
 import SearchInput from "./SearchInput";
@@ -21,7 +27,16 @@ const DrawerMenu = () => {
 
   return (
     <>
-      <MenuIcon onClick={() => setOpenMenu(true)} />
+      <IconButton
+        onClick={() => setOpenMenu(true)}
+        size="large"
+        edge="start"
+        color="inherit"
+        aria-label="menu"
+        sx={{ marginRight: "1rem" }}
+      >
+        <MenuIcon />
+      </IconButton>
 
       <Drawer open={openMenu} onClose={() => setOpenMenu(!openMenu)}>
         <SearchInput type="menu" setOpenMenu={setOpenMenu} />

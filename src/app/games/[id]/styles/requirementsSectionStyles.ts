@@ -1,19 +1,24 @@
 import { SxProps } from "@mui/material";
 
 export const requirementSectionStyle: SxProps = {
-  minWidth: "280px",
+  minWidth: "250px",
+  maxWidth: "500px",
   width: "45%",
   margin: "2rem auto",
   "@media (max-width: 800px)": {
     width: "80%",
+  },
+  "@media (max-width: 600px)": {
+    width: "95%",
   },
 };
 
 export const requirementHeadingStyle: SxProps = {
   fontSize: "1.875rem",
   fontWeight: 700,
-  marginBottom: "1.5rem",
   textAlign: "center",
+  width: "50%",
+  margin: "2rem auto",
 };
 
 export const requirementDivStyle: SxProps = {

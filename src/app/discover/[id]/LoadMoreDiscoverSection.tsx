@@ -2,7 +2,6 @@
 
 import InfiniteScrollComponent from "@/components/InfiniteScrollComponent";
 import useLoadMoreDiscover from "@/hooks/useLoadMoreDiscover";
-import CircularProgress from "@mui/material/CircularProgress";
 import React from "react";
 
 const LoadMoreDiscoverSection = () => {

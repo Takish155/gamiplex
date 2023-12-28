@@ -5,7 +5,7 @@ export const paperStyle: SxProps = {
     transform: "scale(1.05)",
     transition: "all 0.3s ease",
   },
-  width: "250px",
+  width: "280px",
   overflow: "hidden",
   borderRadius: "1.5rem",
 };
@@ -39,12 +39,9 @@ export const headingStyle: SxProps = {
   marginBottom: "1rem",
 };
 
-export const ratingStyle: SxProps = {
+export const detailsTextStyle: SxProps = {
   fontSize: "1.1rem",
-  fontWeight: "700",
-  width: "30%",
-  textAlign: "center",
-  borderRadius: "6px",
-  paddingTop: "0.25rem",
-  paddingBottom: "0.25rem",
+  display: "flex",
+  alignItems: "center",
+  gap: "0.3rem",
 };

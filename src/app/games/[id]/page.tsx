@@ -32,13 +32,15 @@ const GamePage = async ({ params }: { params: { id: string } }) => {
           <ComputerRequirements data={data} />
         </>
       ) : (
-        <Box sx={articleStylesAlt} component="article">
-          <QuickDetails data={data} />
-          <Box sx={sectionStylesAlt} component="section">
-            <GameDescription data={data} />
+        <>
+          <Box sx={articleStylesAlt} component="article">
+            <QuickDetails data={data} />
+            <Box sx={sectionStylesAlt} component="section">
+              <GameDescription data={data} />
+            </Box>
           </Box>
           <ComputerRequirements data={data} />
-        </Box>
+        </>
       )}
     </Box>
   );

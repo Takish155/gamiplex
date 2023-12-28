@@ -6,10 +6,10 @@ import { SxProps } from "@mui/material";
 import Box from "@mui/material/Box";
 
 const articleStyle: SxProps = {
-  maxWidth: "1010px",
+  width: "90%",
   margin: "0 auto",
   display: "flex",
-  gap: "4.75rem",
+  justifyContent: "space-around",
   flexWrap: "wrap",
 };
 
@@ -18,10 +18,12 @@ const ComputerRequirements = async ({ data }: { data: FetchGameInfoType }) => {
     (ele) => ele.platform.id === 4
   );
 
-  const minimumRequirements = requirements(platform!.requirements.minimum);
+  const minimumRequirements = requirements(
+    platform?.requirements.minimum ?? ""
+  );
 
   const recommendedRequirements = requirements(
-    platform!.requirements.recommended
+    platform?.requirements.recommended ?? ""
   );
 
   return (

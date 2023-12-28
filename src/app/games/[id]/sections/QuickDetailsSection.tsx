@@ -12,12 +12,13 @@ import {
   quickDetailsSectionStyle,
   infoBackgroundImageStyle,
 } from "../styles/quickDetailsSectionStyles";
+import noImage from "@/../public/images/no-image.png";
 
 const QuickDetails = async ({ data }: { data: FetchGameInfoType }) => {
   return (
     <Box component="section" sx={quickDetailsSectionStyle}>
       <Image
-        src={data.response.gameInfoResponse.background_image}
+        src={data.response.gameInfoResponse.background_image ?? noImage}
         width={270}
         height={90}
         alt={`Background image of ${data.response.gameInfoResponse.name}`}
@@ -27,14 +28,15 @@ const QuickDetails = async ({ data }: { data: FetchGameInfoType }) => {
         <Typography sx={infoHeadingStyle}>Original Name</Typography>
         <Typography sx={infoParagraphStyle}>
           {data.response.gameInfoResponse.name_original ??
-            data.response.gameInfoResponse.name}
+            data.response.gameInfoResponse.name ??
+            "Unknown"}
         </Typography>
       </Box>
       <Divider component="div" sx={infoDividerStyle} />
       <Box sx={infoStyleContainer}>
         <Typography sx={infoHeadingStyle}>Release Date</Typography>
         <Typography sx={infoParagraphStyle}>
-          {data.response.gameInfoResponse.released ?? ""}
+          {data.response.gameInfoResponse.released ?? "Unknown"}
         </Typography>
       </Box>
       <Divider component="div" sx={infoDividerStyle} />
@@ -42,18 +44,20 @@ const QuickDetails = async ({ data }: { data: FetchGameInfoType }) => {
         <Typography sx={infoHeadingStyle}>Platforms</Typography>
         <Typography sx={infoParagraphStyle}>
           {data.response.gameInfoResponse.platforms.map((platform, index) => {
+            if (data.response.gameInfoResponse.platforms.length === 1)
+              return platform.platform.name;
             if (index !== data.response.gameInfoResponse.platforms.length - 1) {
               return platform.platform.name + ", ";
             }
             return " and " + platform.platform.name;
-          })}
+          }) ?? "Unknown"}
         </Typography>
       </Box>
       <Divider component="div" sx={infoDividerStyle} />
       <Box sx={infoStyleContainer}>
         <Typography sx={infoHeadingStyle}>Genres</Typography>
         <Typography sx={infoParagraphStyle}>
-          {data.response.gameInfoResponse.esrb_rating?.name ?? "~"}
+          {data.response.gameInfoResponse.esrb_rating?.name ?? "Unknown"}
         </Typography>
       </Box>
     </Box>

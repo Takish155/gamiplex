@@ -10,7 +10,8 @@ export const gameArticleStyle: SxProps = {
   display: "flex",
   flexWrap: "wrap",
   justifyContent: "center",
-  gap: "4rem",
+  gap: "2rem",
+  width: "100%",
   alignItems: "center",
   marginBottom: "3.5rem",
 };

@@ -3,6 +3,7 @@ import Box from "@mui/material/Box";
 import GameSection from "./GameSection";
 import { gameArticleStyle, mainStyle } from "@/styles/pageStyles";
 import { InfiniteResponseData } from "@/types/reponseDataType";
+import { SxProps } from "@mui/material";
 
 const LoadMainComponent = ({
   data,
@@ -14,7 +15,7 @@ const LoadMainComponent = ({
   SortingComponent?: React.ComponentType;
 }) => {
   if (!data) {
-    return <p>Error, something went wrong....</p>;
+    return;
   }
   return (
     <Box component="main" sx={mainStyle}>

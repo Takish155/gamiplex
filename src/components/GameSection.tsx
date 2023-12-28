@@ -1,11 +1,11 @@
 import { ResponseDataResult } from "@/types/reponseDataType";
 import {
   detailsContainerStyle,
+  detailsTextStyle,
   headingStyle,
   imageContainerStyle,
   infoContainerStyle,
   paperStyle,
-  ratingStyle,
 } from "@/styles/gameSectionStyle";
 import StarIcon from "@mui/icons-material/Star";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
@@ -36,10 +36,10 @@ const GameSection = ({ data }: { data: ResponseDataResult }) => {
               {data.name}
             </Typography>
             <Box sx={detailsContainerStyle}>
-              <Typography variant="body1" sx={{ fontSize: "1.1rem" }}>
-                <AccessTimeIcon /> {data.released}
+              <Typography variant="body1" sx={detailsTextStyle}>
+                <AccessTimeIcon /> {data.released ?? "Unknown"}
               </Typography>
-              <Typography sx={ratingStyle}>
+              <Typography sx={detailsTextStyle}>
                 <StarIcon /> {data.rating}
               </Typography>
             </Box>

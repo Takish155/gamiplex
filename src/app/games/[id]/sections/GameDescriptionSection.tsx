@@ -21,7 +21,13 @@ const GameDescription = async ({ data }: { data: FetchGameInfoType }) => {
     data.response.gameInfoResponse.description
   );
 
+  if (sanitizeDescription.length === 0 || !sanitizeDescription) {
+    return <p>There is no description for this game.</p>;
+  }
   const paragraphs = sanitizeDescription.split(/<\/?p>/);
+  if (paragraphs.length === 1) {
+    paragraphs.unshift("<p>");
+  }
   const englishOnly = paragraphs[1].replaceAll(".", ".<br />");
 
   return (

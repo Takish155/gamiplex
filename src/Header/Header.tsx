@@ -20,17 +20,7 @@ const Header = () => {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="fixed">
         <Toolbar>
-          {<DrawerMenu /> && (
-            <IconButton
-              size="large"
-              edge="start"
-              color="inherit"
-              aria-label="menu"
-              sx={{ marginRight: "1rem" }}
-            >
-              <DrawerMenu />
-            </IconButton>
-          )}
+          {<DrawerMenu /> && <DrawerMenu />}
           <Typography variant="h5" component="h1" sx={{ flexGrow: 1 }}>
             <Link href="/" style={mainHeading}>
               @Gamiplex

@@ -1,9 +1,8 @@
 import { SxProps } from "@mui/material";
 
 export const mainStyles: SxProps = {
-  color: "@theme.palette.text.primary",
   paddingTop: "8rem",
-  width: "95%",
+  width: "100%",
   margin: "0 auto",
 };
 export const articleStyles: SxProps = {
