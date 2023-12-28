@@ -18,7 +18,7 @@
   <li>Axios (Fetching Data)</li>
   <li>Tanstack Query (Query / State Management)</li>
   <li>Vidstack (Video Loader)</li>
-<ul>
+</ul>
 
 <h2>Future Plans</h2>
 <ul>
