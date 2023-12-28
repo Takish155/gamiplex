@@ -4,6 +4,7 @@ export const mainStyle: SxProps = {
   width: "95%",
   margin: "0 auto",
   paddingTop: "6rem",
+  maxWidth: "1440px",
 };
 
 export const gameArticleStyle: SxProps = {
