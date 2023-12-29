@@ -24,6 +24,7 @@ const page = async ({
         data={data}
         LoadMoreComponent={LoadMoreSearchSection}
         SortingComponent={DiscoveryTitle}
+        typeOf="search"
       />
     </LoadMoreSearchContextProvider>
   );

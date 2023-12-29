@@ -2,10 +2,16 @@
 
 import React from "react";
 import GameSection from "./GameSection";
-import { Box, Button, Skeleton, Typography } from "@mui/material";
+import { Box, Button, CircularProgress, Typography } from "@mui/material";
 import { InfiniteScrollComponentProp } from "@/types/tanstackQueryTypes";
 import useInfiniteScrollComponent from "@/hooks/useInfiniteScrollComponent";
-import { noMorePageToBeLoadedStyle } from "@/styles/pageStyles";
+import { motion } from "framer-motion";
+import {
+  loadMoreButtonDivStyle,
+  loadMoreButtonStyle,
+  loadingContainerStyle,
+  noMorePageToBeLoadedStyle,
+} from "@/styles/pageStyles";
 
 const InfiniteScrollComponent = ({
   data,
@@ -14,12 +20,9 @@ const InfiniteScrollComponent = ({
   isLoading,
 }: InfiniteScrollComponentProp) => {
   const {
-    loadMoreButtonDivStyle,
-    loadMoreButtonStyle,
     ref,
     loadMore,
     setLoadMore,
-    skeletonMapper,
     showLoadComponent,
     setShowLoadComponent,
   } = useInfiniteScrollComponent(fetchNextPage);
@@ -39,7 +42,7 @@ const InfiniteScrollComponent = ({
           return (
             <React.Fragment key={index}>
               {data?.response.results.map((games, index) => {
-                return <GameSection data={games} key={index} />;
+                return <GameSection data={games} key={index} index={index} />;
               })}
             </React.Fragment>
           );
@@ -47,40 +50,42 @@ const InfiniteScrollComponent = ({
 
       {loadMore ? (
         showLoadComponent ? (
-          <Box ref={ref} id="loadMoreComponent"></Box>
+          <Box
+            id="loadMoreComponent"
+            ref={ref}
+            sx={loadingContainerStyle}
+          ></Box>
         ) : (
           <Typography sx={noMorePageToBeLoadedStyle}>
             No more page available...
           </Typography>
         )
       ) : (
-        <Box sx={loadMoreButtonDivStyle}>
+        <motion.div
+          style={loadMoreButtonDivStyle as React.CSSProperties}
+          variants={{ hidden: { opacity: 0 }, visible: { opacity: 1 } }}
+          initial="hidden"
+          animate="visible"
+          transition={{ delay: 8 * 0.3, ease: "easeInOut", duration: 0.5 }}
+        >
           <Button
             variant="contained"
             sx={loadMoreButtonStyle}
             onClick={() => {
               setLoadMore(true);
-              if (fetchNextPage) {
-                fetchNextPage();
-              }
             }}
           >
             Load More
           </Button>
-        </Box>
+        </motion.div>
       )}
 
       {isLoading ||
-        (isFetchingNextPage &&
-          skeletonMapper.map((key) => (
-            <Skeleton
-              key={key}
-              width={280}
-              height={350}
-              variant="rectangular"
-              sx={{ borderRadius: "1.5rem" }}
-            />
-          )))}
+        (isFetchingNextPage && (
+          <Box sx={loadingContainerStyle}>
+            <CircularProgress />
+          </Box>
+        ))}
     </>
   );
 };

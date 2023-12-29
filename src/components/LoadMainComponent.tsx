@@ -30,7 +30,7 @@ const LoadMainComponent = ({
       ) : (
         <Box component="article" id="main" sx={gameArticleStyle}>
           {data.response.results.map((games, index) => {
-            return <GameSection data={games} key={index} />;
+            return <GameSection data={games} key={index} index={index} />;
           })}
           <LoadMoreComponent />
         </Box>

@@ -16,6 +16,7 @@ const page = async ({ params }: { params: { query: string } }) => {
         data={data}
         LoadMoreComponent={LoadMoreSearchSection}
         SortingComponent={DiscoveryTitle}
+        typeOf="search"
       />
     </LoadMoreSearchContextProvider>
   );
@@ -29,7 +30,7 @@ export async function generateMetadata({
   params: { query: string };
 }): Promise<Metadata> {
   return {
-    title: `Search ${params.query} Games  | Gamiplex`,
+    title: `Search ${params.query.replace("%20", " ")} Games  | Gamiplex`,
     description: `Search ${params.query} games on Gamiplex. Find new games to play by searching through our list of ${params.query} games.`,
   };
 }

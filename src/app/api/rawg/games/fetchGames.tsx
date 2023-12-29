@@ -1,4 +1,6 @@
 import axios from "axios";
+import GameSection from "@/components/GameSection";
+import { InfiniteResponseData } from "@/types/reponseDataType";
 
 export const fetchGames = async (
   pageNumber: string | null,
@@ -10,7 +12,7 @@ export const fetchGames = async (
   const url = "https://api.rawg.io/api/games";
   try {
     if (type === "getByGenres") {
-      const response = await axios.get(url, {
+      const response = await axios.get<InfiniteResponseData>(url, {
         params: {
           key: process.env.API_KEY,
           page_size: 18,
@@ -24,7 +26,7 @@ export const fetchGames = async (
       return response.data;
     }
 
-    const response = await axios.get(url, {
+    const response = await axios.get<InfiniteResponseData>(url, {
       params: {
         key: process.env.API_KEY,
         page_size: 18,
@@ -33,6 +35,7 @@ export const fetchGames = async (
         ordering: sort ?? "",
       },
     });
+
     return response.data;
   } catch (err) {
     console.log((err as Error).message.toString());

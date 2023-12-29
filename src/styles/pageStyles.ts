@@ -7,7 +7,7 @@ export const mainStyle: SxProps = {
   maxWidth: "1440px",
 };
 
-export const gameArticleStyle: SxProps = {
+export const gameArticleStyle: React.CSSProperties = {
   display: "flex",
   flexWrap: "wrap",
   justifyContent: "center",
@@ -30,4 +30,20 @@ export const noMorePageToBeLoadedStyle: SxProps = {
   textAlign: "center",
   fontSize: "1.5rem",
   marginTop: "2rem",
+};
+
+export const loadingContainerStyle: SxProps = {
+  width: "100vw",
+  display: "flex",
+  justifyContent: "center",
+};
+
+export const loadMoreButtonDivStyle: SxProps = {
+  display: "flex",
+  justifyContent: "center",
+  width: "100vw",
+};
+
+export const loadMoreButtonStyle: SxProps = {
+  width: "10rem",
 };

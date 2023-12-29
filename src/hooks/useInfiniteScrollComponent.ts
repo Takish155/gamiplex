@@ -29,25 +29,11 @@ const useInfiniteScrollComponent = (
       fetchNextPage();
     }
   }, [inView, fetchNextPage, loadMore]);
-  const skeletonMapper = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-
-  const loadMoreButtonDivStyle: SxProps = {
-    display: "flex",
-    justifyContent: "center",
-    width: "100vw",
-  };
-
-  const loadMoreButtonStyle: SxProps = {
-    width: "10rem",
-  };
 
   return {
-    loadMoreButtonDivStyle,
-    loadMoreButtonStyle,
     ref,
     loadMore,
     setLoadMore,
-    skeletonMapper,
     showLoadComponent,
     setShowLoadComponent,
   };

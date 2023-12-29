@@ -1,3 +1,5 @@
+"use client";
+
 import { ResponseDataResult } from "@/types/reponseDataType";
 import {
   detailsContainerStyle,
@@ -16,37 +18,52 @@ import noImage from "@/../public/images/no-image.png";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
+import { motion } from "framer-motion";
+import MotionSection from "./MotionSection";
 
-const GameSection = ({ data }: { data: ResponseDataResult }) => {
+const GameSection = ({
+  data,
+  index,
+}: {
+  data: ResponseDataResult;
+  index: number;
+}) => {
   return (
-    <Link href={`/games/${data.id}`}>
-      <Paper key={data.id} sx={paperStyle} elevation={6}>
-        <>
-          <Box sx={imageContainerStyle}>
-            <Image
-              src={data.background_image ?? noImage}
-              alt={`Background image of ${data.background_image}`}
-              layout="fill"
-              objectFit="cover"
-              sizes="(max-width: 300px) 100vw, 300px"
-            />
-          </Box>
-          <Box sx={infoContainerStyle}>
-            <Typography variant="h2" sx={headingStyle}>
-              {data.name}
-            </Typography>
-            <Box sx={detailsContainerStyle}>
-              <Typography variant="body1" sx={detailsTextStyle}>
-                <AccessTimeIcon /> {data.released ?? "Unknown"}
-              </Typography>
-              <Typography sx={detailsTextStyle}>
-                <StarIcon /> {data.rating}
-              </Typography>
+    <MotionSection
+      variants={{ hidden: { opacity: 0 }, visible: { opacity: 1 } }}
+      initial="hidden"
+      animate="visible"
+      transition={{ delay: index * 0.3, ease: "easeInOut", duration: 0.5 }}
+    >
+      <Link href={`/games/${data.id}`}>
+        <Paper key={data.id} sx={paperStyle} elevation={6}>
+          <>
+            <Box sx={imageContainerStyle}>
+              <Image
+                src={data.background_image ?? noImage}
+                alt={`Background image of ${data.background_image}`}
+                layout="fill"
+                objectFit="cover"
+                sizes="(max-width: 300px) 100vw, 300px"
+              />
             </Box>
-          </Box>
-        </>
-      </Paper>
-    </Link>
+            <Box sx={infoContainerStyle}>
+              <Typography variant="h2" sx={headingStyle}>
+                {data.name}
+              </Typography>
+              <Box sx={detailsContainerStyle}>
+                <Typography variant="body1" sx={detailsTextStyle}>
+                  <AccessTimeIcon /> {data.released ?? "Unknown"}
+                </Typography>
+                <Typography sx={detailsTextStyle}>
+                  <StarIcon /> {data.rating}
+                </Typography>
+              </Box>
+            </Box>
+          </>
+        </Paper>
+      </Link>
+    </MotionSection>
   );
 };
 

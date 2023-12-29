@@ -55,10 +55,19 @@ const DiscoveryTitle = () => {
               );
             }}
           >
-            Popularity
+            Relevance
           </MenuItem>
           {fields.map((field) => {
-            return (
+            return [
+              <MenuItem
+                key={field}
+                value={"-" + field}
+                onClick={() => {
+                  router.push(`/${pathName[1]}/${pathName[2]}/-${field}/`);
+                }}
+              >
+                {field.charAt(0).toUpperCase() + field.slice(1)} Descending
+              </MenuItem>,
               <MenuItem
                 key={field}
                 value={field}
@@ -66,22 +75,9 @@ const DiscoveryTitle = () => {
                   router.push(`/${pathName[1]}/${pathName[2]}/${field}/`);
                 }}
               >
-                {field.charAt(0).toUpperCase() + field.slice(1)} Descending
-              </MenuItem>
-            );
-          })}
-          {fields.map((field) => {
-            return (
-              <MenuItem
-                key={field}
-                value={`-${field}`}
-                onClick={() => {
-                  router.push(`/${pathName[1]}/${pathName[2]}/-${field}/`);
-                }}
-              >
                 {field.charAt(0).toUpperCase() + field.slice(1)} Ascending
-              </MenuItem>
-            );
+              </MenuItem>,
+            ];
           })}
         </Select>
       </FormControl>
