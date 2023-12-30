@@ -3,15 +3,18 @@
 import React from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import {
+  Box,
   Drawer,
   IconButton,
   List,
   ListItem,
   ListItemButton,
+  ListItemIcon,
 } from "@mui/material";
 import { useGetGenres } from "@/hooks/useGetGenres";
 import { useRouter } from "next/navigation";
 import SearchInput from "./SearchInput";
+import Image from "next/image";
 
 const DrawerMenu = () => {
   const { genres, openMenu, setOpenMenu } = useGetGenres();
@@ -40,10 +43,14 @@ const DrawerMenu = () => {
 
       <Drawer open={openMenu} onClose={() => setOpenMenu(!openMenu)}>
         <SearchInput type="menu" setOpenMenu={setOpenMenu} />
-        {genres.data?.response.results.map((genres) => {
-          return (
-            <List key={genres.id}>
-              <ListItem disablePadding sx={{ minWidth: "250px" }}>
+        <List>
+          {genres.data?.response.results.map((genres) => {
+            return (
+              <ListItem
+                sx={{ minWidth: "250px" }}
+                disablePadding
+                key={genres.id}
+              >
                 <ListItemButton
                   onClick={() => {
                     router.push(
@@ -52,12 +59,21 @@ const DrawerMenu = () => {
                     setOpenMenu(false);
                   }}
                 >
+                  <ListItemIcon>
+                    <Image
+                      src={genres.image_background}
+                      alt={genres.name}
+                      height={40}
+                      width={40}
+                      style={{ borderRadius: "40%" }}
+                    />
+                  </ListItemIcon>
                   {genres.name}
                 </ListItemButton>
               </ListItem>
-            </List>
-          );
-        })}
+            );
+          })}
+        </List>
       </Drawer>
     </>
   );

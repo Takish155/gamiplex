@@ -5,28 +5,27 @@ import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import IconButton from "@mui/material/IconButton";
 import DrawerMenu from "./DrawerMenu";
-
-const mainHeading: React.CSSProperties = {
-  color: "#fff",
-  fontWeight: "bold",
-  fontSize: "1.5rem",
-  textDecoration: "underline",
-};
+import NavBar from "./NavBar";
+import { mainHeading, toolBarStyle } from "./_headerStyle";
 
 const Header = () => {
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box component="header">
       <AppBar position="fixed">
-        <Toolbar>
-          {<DrawerMenu /> && <DrawerMenu />}
-          <Typography variant="h5" component="h1" sx={{ flexGrow: 1 }}>
-            <Link href="/" style={mainHeading}>
-              @Gamiplex
-            </Link>
-          </Typography>
-          <SearchInput type="header" />
+        <Toolbar disableGutters sx={toolBarStyle}>
+          <Box sx={{ display: "flex", alignItems: "center" }}>
+            <DrawerMenu />
+            <Typography variant="h5" component="h1">
+              <Link href="/" style={mainHeading}>
+                @Gamiplex
+              </Link>
+            </Typography>
+            <NavBar />
+          </Box>
+          <Box>
+            <SearchInput type="header" />
+          </Box>
         </Toolbar>
       </AppBar>
     </Box>

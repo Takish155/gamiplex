@@ -6,6 +6,7 @@ import { Genres } from "@/types/reponseDataType";
 import LoadMoreDiscoverSection from "../LoadMoreDiscoverSection";
 import LoadMainComponent from "@/components/LoadMainComponent";
 import { Metadata } from "next";
+import Header from "@/Header/Header";
 
 const page = async ({ params }: { params: { id: string; sort: string } }) => {
   const data = await getMovie(

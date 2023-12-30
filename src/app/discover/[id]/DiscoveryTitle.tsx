@@ -14,7 +14,7 @@ import {
   discoverSortStyle,
   discoverTitleSectionStyle,
   discoverTitleStyle,
-} from "./styles/discoverStyle";
+} from "./_discoverStyle";
 
 const DiscoveryTitle = () => {
   const router = useRouter();

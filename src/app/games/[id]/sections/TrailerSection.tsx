@@ -48,11 +48,16 @@ const TrailerSection = ({ data }: { data: FetchGameInfoType }) => {
                 onClick={() => {
                   setCurrentTrailer(trailers);
                 }}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") setCurrentTrailer(trailers);
+                }}
+                tabIndex={0}
                 style={{
                   maxHeight: "80px",
                   width: "auto",
                   height: "50%",
                   cursor: "pointer",
+                  marginTop: "0.3rem",
                   marginBottom: "0.75rem",
                   border:
                     currentTrailer?.data[480] === trailers.data[480]

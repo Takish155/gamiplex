@@ -18,7 +18,6 @@ import noImage from "@/../public/images/no-image.png";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import { motion } from "framer-motion";
 import MotionSection from "./MotionSection";
 
 const GameSection = ({

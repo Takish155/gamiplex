@@ -7,13 +7,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Box, useMediaQuery } from "@mui/material";
-
-const searchInputPaper = {
-  padding: "2px 4px",
-  display: "flex",
-  alignItems: "center",
-  width: "250px",
-};
+import { searchInputPaper } from "./_headerStyle";
 
 const SearchInput = ({
   type,
@@ -29,6 +23,7 @@ const SearchInput = ({
   return (
     <Box
       sx={{
+        margin: "1rem auto",
         display:
           type === "header" && !matches
             ? "block"
@@ -43,9 +38,6 @@ const SearchInput = ({
             sx={{
               ml: 1,
               flex: 1,
-              "& .MuiInputBase-input": {
-                color: "#fff",
-              },
             }}
             value={input}
             onChange={(e) => setInput(e.target.value)}
@@ -54,7 +46,7 @@ const SearchInput = ({
           />
           <IconButton
             type="button"
-            sx={{ p: "10px", color: "#fff" }}
+            sx={{ padding: "1rem", color: "#fff" }}
             aria-label="search"
             onClick={() => {
               router.push(`/search/${input}`);

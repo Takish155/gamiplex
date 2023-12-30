@@ -22,7 +22,7 @@
 
 <h2>Future Plans</h2>
 <ul>
-  <li>Use framer motion to add animation when the games is loaded.</li>
+  <li>Use framer motion to add animation when the games is loaded. ✅</li>
   <li>Add authentication system (login/registration system)</li>
   <li>Add favorite system for authenticated users</li>
 </ul>

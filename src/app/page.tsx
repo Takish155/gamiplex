@@ -3,6 +3,7 @@ import { LoadMoreHomeContextProvider } from "@/context/UseInfiniteScrollContext"
 import LoadMoreHomeSection from "@/components/LoadMoreHomeSection";
 import LoadMainComponent from "@/components/LoadMainComponent";
 import { Metadata } from "next";
+import Header from "@/Header/Header";
 
 export default async function Home() {
   const data = await getMovie(1, "");

@@ -7,6 +7,7 @@ export const trailerSectionStyle: SxProps = {
 };
 
 export const trailerHeadingStyle: SxProps = {
+  marginTop: "1.2rem",
   fontSize: "1.25rem",
   fontWeight: "bold",
   marginBottom: "0.75rem",

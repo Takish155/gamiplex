@@ -5,6 +5,7 @@ import DiscoveryTitle from "./DiscoveryTitle";
 import { LoadMoreDiscoverContextProvider } from "@/context/UseLoadMoreDiscoverContext";
 import LoadMainComponent from "@/components/LoadMainComponent";
 import { Metadata } from "next";
+import Header from "@/Header/Header";
 
 const page = async ({ params }: { params: { id: string } }) => {
   const data = await getMovie(1, "", params.id, "getByGenres");

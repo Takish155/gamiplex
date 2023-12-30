@@ -1,13 +1,13 @@
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
-import { Roboto } from "next/font/google";
+import { Poppins } from "next/font/google";
 import "./globals.css";
 import QueryProvider from "@/context/QueryProviderContext";
-import Header from "@/Header/Header";
 import { ThemeProvider } from "@mui/material";
 import { themeOptions } from "@/styles/themeOptions";
+import Header from "@/Header/Header";
 
-const roboto = Roboto({
+const poppins = Poppins({
   subsets: ["latin"],
   weight: ["300", "400", "500", "700"],
 });
@@ -26,7 +26,7 @@ export default function RootLayout({
   return (
     <ThemeProvider theme={themeOptions}>
       <html lang="en">
-        <body className={roboto.className}>
+        <body className={poppins.className}>
           <QueryProvider>
             <Header />
             {children}
