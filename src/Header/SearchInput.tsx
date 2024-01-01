@@ -6,8 +6,9 @@ import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Box, useMediaQuery } from "@mui/material";
+import { Box, Button, useMediaQuery } from "@mui/material";
 import { searchInputPaper } from "./_headerStyle";
+import { signOut, useSession } from "next-auth/react";
 
 const SearchInput = ({
   type,
@@ -19,6 +20,7 @@ const SearchInput = ({
   const [input, setInput] = useState("");
   const router = useRouter();
   const matches = useMediaQuery("(max-width:750px)");
+  const session = useSession();
 
   return (
     <Box
@@ -57,6 +59,9 @@ const SearchInput = ({
           </IconButton>
         </>
       </Paper>
+      {session.status === "authenticated" && (
+        <Button onClick={() => signOut()}>Sign out</Button>
+      )}
     </Box>
   );
 };
