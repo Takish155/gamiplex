@@ -6,6 +6,7 @@ import QueryProvider from "@/context/QueryProviderContext";
 import { ThemeProvider } from "@mui/material";
 import { themeOptions } from "@/styles/themeOptions";
 import Header from "@/Header/Header";
+import AuthProvider from "./auth/AuthProvider";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -27,11 +28,13 @@ export default function RootLayout({
     <ThemeProvider theme={themeOptions}>
       <html lang="en">
         <body className={poppins.className}>
-          <QueryProvider>
-            <Header />
-            {children}
-            <SpeedInsights />
-          </QueryProvider>
+          <AuthProvider>
+            <QueryProvider>
+              <Header />
+              {children}
+            </QueryProvider>
+          </AuthProvider>
+          <SpeedInsights />
         </body>
       </html>
     </ThemeProvider>

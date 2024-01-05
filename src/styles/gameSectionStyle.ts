@@ -15,7 +15,7 @@ export const imageContainerStyle: SxProps = {
   width: "full",
   paddingTop: "75%",
   marginBottom: 5,
-  borderRadius: "3xl",
+  borderRadius: "1.5rem",
   overflow: "hidden",
 };
 

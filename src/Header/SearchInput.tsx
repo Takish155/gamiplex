@@ -6,8 +6,9 @@ import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Box, useMediaQuery } from "@mui/material";
+import { Box, Button, CircularProgress, useMediaQuery } from "@mui/material";
 import { searchInputPaper } from "./_headerStyle";
+import { signOut, useSession } from "next-auth/react";
 
 const SearchInput = ({
   type,
@@ -19,17 +20,23 @@ const SearchInput = ({
   const [input, setInput] = useState("");
   const router = useRouter();
   const matches = useMediaQuery("(max-width:750px)");
+  const session = useSession();
 
   return (
     <Box
       sx={{
         margin: "1rem auto",
+        gap: "1rem",
+        justifyContent: "center",
         display:
           type === "header" && !matches
-            ? "block"
+            ? "flex"
             : type !== "header" && matches
-            ? "block"
+            ? "flex"
             : "none",
+        "@media (max-width: 750px)": {
+          flexWrap: "wrap",
+        },
       }}
     >
       <Paper component="form" sx={searchInputPaper}>
@@ -57,6 +64,21 @@ const SearchInput = ({
           </IconButton>
         </>
       </Paper>
+      {session.status === "loading" && <CircularProgress />}
+      {session.status === "unauthenticated" && (
+        <Button
+          variant="text"
+          size="medium"
+          onClick={() => router.push("/auth/login")}
+        >
+          Login
+        </Button>
+      )}
+      {session.status === "authenticated" && (
+        <Button variant="text" size="medium" onClick={() => signOut()}>
+          Logout
+        </Button>
+      )}
     </Box>
   );
 };

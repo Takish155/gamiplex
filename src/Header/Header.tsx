@@ -18,7 +18,7 @@ const Header = () => {
             <DrawerMenu />
             <Typography variant="h5" component="h1">
               <Link href="/" style={mainHeading}>
-                @Gamiplex
+                Gamiplex
               </Link>
             </Typography>
             <NavBar />

@@ -11,8 +11,7 @@ export const toolBarStyle: SxProps = {
 export const mainHeading: React.CSSProperties = {
   color: "#fff",
   fontWeight: "bold",
-  fontSize: "1.5rem",
-  textDecoration: "underline",
+  fontSize: "1.7rem",
   marginRight: "1rem",
 };
 
