@@ -6,11 +6,10 @@
     "dev": "next dev",
     "start": "next start",
     "lint": "next lint",
-    "postinstall": "prisma generate",
+    "postinstall": "npx prisma generate",
     "build": "prisma generate && next build"
   },
   "dependencies": {
-    "@prisma/cli": "^3.10.0",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@hookform/resolvers": "^3.3.3",
