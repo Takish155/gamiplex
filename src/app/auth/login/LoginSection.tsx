@@ -3,7 +3,7 @@
 import { Alert, Box, Button, TextField } from "@mui/material";
 import React, { useEffect } from "react";
 import { buttonBox, buttonStyle, loginForm, textField } from "../_authStyle";
-import useLogin from "@/hooks/useLogin";
+import useLogin from "@/hooks/user/useLogin";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
@@ -16,7 +16,7 @@ const LoginSection = () => {
     if (session.status === "authenticated") {
       router.push("/");
     }
-  }, [session]);
+  }, [session, router]);
 
   return (
     <Box
@@ -55,7 +55,12 @@ const LoginSection = () => {
         <Button type="submit" variant="contained" sx={buttonStyle}>
           Sign-in
         </Button>
-        <Button sx={buttonStyle} color="secondary" variant="contained">
+        <Button
+          sx={buttonStyle}
+          color="secondary"
+          variant="contained"
+          onClick={() => router.push("/auth/register")}
+        >
           Create account
         </Button>
       </Box>

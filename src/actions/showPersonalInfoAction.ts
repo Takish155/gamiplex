@@ -3,21 +3,17 @@
 import { getServerSession } from "next-auth";
 import prisma from "../../prisma/prisma";
 
-const showFavoriteAction = async () => {
+const showPersonalInfoAction = async () => {
   const session = await getServerSession();
   const user = await prisma.user.findUnique({
     where: { email: session!.user!.email! },
   });
 
-  const data = await prisma.favoriteGames.findMany({
-    where: { userId: user!.id.toString() },
-  });
-
-  if (!data) {
-    return null;
+  if (!user) {
+    throw new Error("User not found");
   }
 
-  return data;
+  return { name: user.name, email: user.email };
 };
 
-export default showFavoriteAction;
+export default showPersonalInfoAction;

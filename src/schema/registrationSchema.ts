@@ -2,6 +2,13 @@ import z from "zod";
 
 export const registrationSchema = z
   .object({
+    name: z
+      .string()
+      .min(3, { message: "Name must be more than 3 letters" })
+      .max(30, { message: "Name must be less than 30 letters" })
+      .refine((data) => /^[a-zA-Z\s]*$/.test(data), {
+        message: "Name cannot contain numbers special characters",
+      }),
     email: z.string().email({ message: "Invalid email adresss..." }),
     password: z
       .string()

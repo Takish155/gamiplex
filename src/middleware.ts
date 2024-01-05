@@ -4,5 +4,5 @@ export const config = {
   // * : Zero or more
   // + : One or more
   // ? : Zero or one
-  matcher: ["/user"], // If not login, will redirect the user to Login page
+  matcher: ["/user", "/user/settings"], // If not login, will redirect the user to Login page
 };

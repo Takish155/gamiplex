@@ -1,20 +1,22 @@
+"use client";
+
 import React from "react";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-import { mainPageStyle } from "../auth/_authStyle";
+import Typography from "@mui/material/Typography";
+import FavoriteGameList from "./FavoriteGameList";
+import { favoriteGameHeading, favoriteGameSection } from "./_userStyles";
 
-const page = () => {
+const page = async () => {
   return (
-    <Box sx={mainPageStyle}>
-      <Grid container>
-        <Grid item xs={12} md={6}>
-          a
-        </Grid>
-        <Grid item xs={12} md={6}>
-          i
-        </Grid>
-      </Grid>
-    </Box>
+    <Grid item xs={12} md={8.5}>
+      <Box sx={favoriteGameSection}>
+        <Typography variant="h5" sx={favoriteGameHeading} component="h2">
+          Favorite Games
+        </Typography>
+        <FavoriteGameList />
+      </Box>
+    </Grid>
   );
 };
 

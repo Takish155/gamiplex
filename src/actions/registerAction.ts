@@ -9,6 +9,7 @@ import {
 
 const registerAction = async (formData: RegistrationSchemaType) => {
   const data = registrationSchema.safeParse({
+    name: formData.name,
     email: formData.email,
     password: formData.password,
     passwordAgain: formData.passwordAgain,
@@ -30,6 +31,7 @@ const registerAction = async (formData: RegistrationSchemaType) => {
 
   await prisma.user.create({
     data: {
+      name: data.data.name,
       email: data.data.email,
       hashedPassword: hashedPassword,
     },

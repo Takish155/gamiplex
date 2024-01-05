@@ -5,7 +5,7 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { buttonBox, buttonStyle, loginForm, textField } from "../_authStyle";
-import useRegister from "@/hooks/useRegister";
+import useRegister from "@/hooks/user/useRegister";
 import { Alert } from "@mui/material";
 
 const RegisterSection = () => {
@@ -29,6 +29,15 @@ const RegisterSection = () => {
           {message}
         </Alert>
       )}
+      <TextField
+        label="Name"
+        type="text"
+        variant="filled"
+        sx={textField}
+        error={errors.name ? true : false}
+        helperText={errors.name ? errors.name.message : ""}
+        {...register("name")}
+      />
       <TextField
         label="Email"
         type="email"
