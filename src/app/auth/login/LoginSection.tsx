@@ -1,14 +1,15 @@
 "use client";
 
-import { Alert, Box, Button, TextField } from "@mui/material";
+import { Alert, Box, Button, CircularProgress, TextField } from "@mui/material";
 import React, { useEffect } from "react";
 import { buttonBox, buttonStyle, loginForm, textField } from "../_authStyle";
-import useLogin from "@/hooks/user/useLogin";
+import useLogin from "@/hooks/user/account/useLogin";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
 const LoginSection = () => {
-  const { register, errors, handleSubmit, message, onSubmit } = useLogin();
+  const { register, errors, handleSubmit, message, signInMutation } =
+    useLogin();
   const session = useSession();
   const router = useRouter();
 
@@ -18,11 +19,18 @@ const LoginSection = () => {
     }
   }, [session, router]);
 
+  if (session.status === "loading") return null;
+
   return (
     <Box
       component="form"
       sx={loginForm}
-      onSubmit={handleSubmit((data) => onSubmit(data))}
+      onSubmit={handleSubmit((data) => {
+        signInMutation.mutate({
+          email: data.email,
+          password: data.password,
+        });
+      })}
     >
       {message && (
         <Alert
@@ -52,9 +60,13 @@ const LoginSection = () => {
         helperText={errors.password ? errors.password.message : ""}
       />
       <Box sx={buttonBox}>
-        <Button type="submit" variant="contained" sx={buttonStyle}>
-          Sign-in
-        </Button>
+        {signInMutation.isPending ? (
+          <CircularProgress />
+        ) : (
+          <Button type="submit" variant="contained" sx={buttonStyle}>
+            Sign-in
+          </Button>
+        )}
         <Button
           sx={buttonStyle}
           color="secondary"

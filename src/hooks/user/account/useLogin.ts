@@ -1,8 +1,9 @@
 import { LoginSchemaType, loginSchema } from "@/schema/loginSchemta";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation } from "@tanstack/react-query";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 const useLogin = () => {
@@ -23,17 +24,20 @@ const useLogin = () => {
       redirect: false,
     }).then((res) => {
       if (!res?.ok) {
-        setMessage("Invalid email or password");
-      } else {
-        setMessage("Success login into your account");
+        setMessage("Invalid credentials");
       }
     });
   };
 
+  const signInMutation = useMutation({
+    mutationFn: async ({ email, password }: LoginSchemaType) =>
+      onSubmit({ email, password }),
+  });
+
   return {
     register,
     handleSubmit,
-    onSubmit,
+    signInMutation,
     errors,
     message,
   };

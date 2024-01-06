@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import { mainStyle } from "./_userStyles";
 import Divider from "@mui/material/Divider";
-import UserMenu from "./UserMenu";
+import UserMenu from "./section/UserMenu";
 
 const layout = ({ children }: { children: ReactNode }) => {
   return (

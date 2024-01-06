@@ -9,6 +9,7 @@ import {
   mainPageStyle,
 } from "../_authStyle";
 import LoginSection from "./LoginSection";
+import { Metadata } from "next";
 
 const page = () => {
   return (
@@ -27,3 +28,11 @@ const page = () => {
 };
 
 export default page;
+
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: "Login | Gamiplex",
+    description:
+      "Sign-in to your Gamiplex account to access your favorite game list.",
+  };
+}

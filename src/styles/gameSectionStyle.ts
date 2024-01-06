@@ -45,3 +45,19 @@ export const detailsTextStyle: SxProps = {
   alignItems: "center",
   gap: "0.3rem",
 };
+
+export const favoriteGameListContainer: SxProps = {
+  display: "flex",
+  flexWrap: "wrap",
+  justifyContent: "center",
+  gap: "3rem",
+};
+
+export const removeButtonContainer: SxProps = {
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  margin: "2rem auto",
+  gap: "1rem",
+  width: "100%",
+};

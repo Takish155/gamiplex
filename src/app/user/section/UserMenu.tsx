@@ -10,7 +10,7 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import SettingsIcon from "@mui/icons-material/Settings";
 import SignOutMenuItem from "./SignOutMenuItem";
-import { menuItem } from "./_userStyles";
+import { menuItem } from "../_userStyles";
 import { usePathname, useRouter } from "next/navigation";
 
 const UserMenu = () => {

@@ -17,8 +17,10 @@ const useRegister = () => {
     resolver: zodResolver(registrationSchema),
   });
   const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const onSubmit = async (data: RegistrationSchemaType) => {
+    setLoading(true);
     const response = await registerAction(data);
     setMessage(response.message);
     if (response.message === "Account created successfully... signing in....") {
@@ -27,10 +29,12 @@ const useRegister = () => {
         password: data.password,
         callbackUrl: "/",
       });
+    } else {
+      setLoading(false);
     }
   };
 
-  return { register, handleSubmit, errors, message, onSubmit };
+  return { register, handleSubmit, errors, message, onSubmit, loading };
 };
 
 export default useRegister;

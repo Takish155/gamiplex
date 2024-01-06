@@ -1,7 +1,7 @@
 "use client";
 
-import useGetGameGallery from "@/hooks/useGetGameGallery";
-import { Box, CircularProgress, Typography } from "@mui/material";
+import useGetGameGallery from "@/hooks/games/useGetGameGallery";
+import { Box, CircularProgress, Skeleton, Typography } from "@mui/material";
 import Image from "next/image";
 import React from "react";
 import {
@@ -22,7 +22,15 @@ const GameGallerySection = () => {
     setLoaded,
   } = useGetGameGallery();
 
-  if (isLoading) return <CircularProgress />;
+  if (isLoading)
+    return (
+      <Box
+        component="section"
+        sx={{ display: "flex", justifyContent: "center" }}
+      >
+        <CircularProgress sx={{ margin: "10rem auto" }} />
+      </Box>
+    );
   if (isFetched && !selectedImage) {
     setSelectedImage(data?.results[0].image!);
   }
@@ -37,7 +45,7 @@ const GameGallerySection = () => {
       >
         <Image
           src={selectedImage}
-          alt="Image of idk"
+          alt="Image of showed image of game"
           onLoad={() => setLoaded(true)}
           width={300}
           height={100}
@@ -51,7 +59,7 @@ const GameGallerySection = () => {
               <Image
                 key={key}
                 src={image.image}
-                alt="image of idk"
+                alt="image of games that can be selected"
                 width={141}
                 height={80}
                 style={{

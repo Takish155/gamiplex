@@ -11,7 +11,7 @@ export const articleStyles: SxProps = {
   flexWrap: "wrap-reverse",
   alignItems: "center",
   justifyContent: "center",
-  marginBottom: "4rem",
+  marginBottom: "2rem",
 };
 
 export const sectionStyles: SxProps = {
