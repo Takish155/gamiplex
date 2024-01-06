@@ -1,6 +1,6 @@
 "use client";
 
-import useGetGameGallery from "@/hooks/useGetGameGallery";
+import useGetGameGallery from "@/hooks/games/useGetGameGallery";
 import { Box, CircularProgress, Typography } from "@mui/material";
 import Image from "next/image";
 import React from "react";
@@ -37,7 +37,7 @@ const GameGallerySection = () => {
       >
         <Image
           src={selectedImage}
-          alt="Image of idk"
+          alt="Image of showed image of game"
           onLoad={() => setLoaded(true)}
           width={300}
           height={100}
@@ -51,7 +51,7 @@ const GameGallerySection = () => {
               <Image
                 key={key}
                 src={image.image}
-                alt="image of idk"
+                alt="image of games that can be selected"
                 width={141}
                 height={80}
                 style={{

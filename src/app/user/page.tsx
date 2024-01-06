@@ -4,7 +4,7 @@ import React from "react";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-import FavoriteGameList from "./FavoriteGameList";
+import FavoriteGameList from "./section/FavoriteGameList";
 import { favoriteGameHeading, favoriteGameSection } from "./_userStyles";
 
 const page = async () => {

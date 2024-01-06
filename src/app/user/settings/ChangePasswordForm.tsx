@@ -1,6 +1,13 @@
 "use client";
 
-import { Alert, Box, Button, TextField, Typography } from "@mui/material";
+import {
+  Alert,
+  Box,
+  Button,
+  CircularProgress,
+  TextField,
+  Typography,
+} from "@mui/material";
 import React from "react";
 import {
   accordion,
@@ -8,11 +15,17 @@ import {
   buttonContainer,
   formContainer,
 } from "../_userStyles";
-import useChangePassword from "@/hooks/user/useChangePassword";
+import useChangePassword from "@/hooks/user/account/useChangePassword";
 
 const ChangePasswordForm = () => {
-  const { register, handleSubmit, changePassword, errors, message } =
-    useChangePassword();
+  const {
+    register,
+    handleSubmit,
+    changePassword,
+    errors,
+    message,
+    setMessage,
+  } = useChangePassword();
   return (
     <Box
       component="form"
@@ -29,6 +42,7 @@ const ChangePasswordForm = () => {
       <Box sx={formContainer}>
         {message && (
           <Alert
+            onClose={() => setMessage("")}
             severity={
               message === "Password changed successfully" ? "success" : "error"
             }
@@ -70,9 +84,13 @@ const ChangePasswordForm = () => {
         />
       </Box>
       <Box sx={buttonContainer}>
-        <Button variant="contained" type="submit">
-          Change Password
-        </Button>
+        {changePassword.isPending ? (
+          <CircularProgress />
+        ) : (
+          <Button variant="contained" type="submit">
+            Change Password
+          </Button>
+        )}
       </Box>
     </Box>
   );

@@ -10,13 +10,13 @@ const removeFavoriteGameAction = async (gameId: number) => {
     where: { email: session!.user!.email! },
   });
 
+  if (!user) throw new Error("User not found");
+
   const gameData = await prisma.favoriteGames.findFirst({
     where: { gameId: gameId.toString(), userId: user!.id },
   });
 
-  if (!gameData) {
-    return { message: "Removing game from favorite failed" };
-  }
+  if (!gameData) throw new Error(gameId + " not found");
 
   await prisma.favoriteGames.delete({
     where: { id: gameData.id },

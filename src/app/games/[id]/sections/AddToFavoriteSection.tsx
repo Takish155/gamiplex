@@ -5,10 +5,12 @@ import { FetchGameInfoType } from "@/types/getGameInfoType";
 import { Alert, Button } from "@mui/material";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 const AddToFavoriteSection = ({ data }: { data: FetchGameInfoType }) => {
   const session = useSession();
+  const router = useRouter();
   const { addToFavorite, message } = useFavoriteAction(data);
   const { mutate, isPending } = addToFavorite;
 
@@ -19,6 +21,7 @@ const AddToFavoriteSection = ({ data }: { data: FetchGameInfoType }) => {
   if (session.status === "unauthenticated")
     return (
       <Button
+        onClick={() => router.push("/auth/login")}
         variant="outlined"
         sx={{ margin: "1rem auto" }}
         LinkComponent={Link}

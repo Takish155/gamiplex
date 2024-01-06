@@ -19,7 +19,7 @@ const useUpdatePersonalInfo = () => {
     queryFn: () => showPersonalInfoAction(),
   });
 
-  const updatePersonalInfoMutation = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: async ({
       changedName,
       changedEmail,
@@ -58,14 +58,24 @@ const useUpdatePersonalInfo = () => {
     changedEmail: string,
     password: string
   ) => {
-    updatePersonalInfoMutation.mutate({
+    mutate({
       changedName,
       changedEmail,
       password,
     });
   };
 
-  return { register, handleSubmit, errors, onSubmit, message, data, isLoading };
+  return {
+    register,
+    handleSubmit,
+    errors,
+    onSubmit,
+    message,
+    data,
+    isLoading,
+    isPending,
+    setMessage,
+  };
 };
 
 export default useUpdatePersonalInfo;

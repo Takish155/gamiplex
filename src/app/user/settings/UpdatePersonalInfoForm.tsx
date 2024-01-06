@@ -1,6 +1,13 @@
 "use client";
 
-import { Alert, Box, Button, TextField, Typography } from "@mui/material";
+import {
+  Alert,
+  Box,
+  Button,
+  CircularProgress,
+  TextField,
+  Typography,
+} from "@mui/material";
 import React from "react";
 import {
   accordion,
@@ -8,13 +15,34 @@ import {
   buttonContainer,
   formContainer,
 } from "../_userStyles";
-import useUpdatePersonalInfo from "@/hooks/user/useUpdatePersonalInfo";
+import useUpdatePersonalInfo from "@/hooks/user/account/useUpdatePersonalInfo";
 
 const UpdatePersonalInfoForm = () => {
-  const { handleSubmit, onSubmit, register, errors, message, data, isLoading } =
-    useUpdatePersonalInfo();
+  const {
+    handleSubmit,
+    onSubmit,
+    register,
+    errors,
+    message,
+    setMessage,
+    data,
+    isLoading,
+    isPending,
+  } = useUpdatePersonalInfo();
 
-  if (isLoading) return null;
+  if (isLoading)
+    return (
+      <Box
+        sx={{
+          width: "100vw",
+          height: "50vh",
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        <CircularProgress />
+      </Box>
+    );
 
   return (
     <Box
@@ -31,6 +59,7 @@ const UpdatePersonalInfoForm = () => {
         </Alert>
         {message && (
           <Alert
+            onClose={() => setMessage("")}
             severity={
               message === "Personal info updated successfully!"
                 ? "success"
@@ -70,9 +99,13 @@ const UpdatePersonalInfoForm = () => {
         />
       </Box>
       <Box sx={buttonContainer}>
-        <Button variant="contained" type="submit">
-          Update Pesonal Info
-        </Button>
+        {isPending ? (
+          <CircularProgress />
+        ) : (
+          <Button variant="contained" type="submit">
+            Update Pesonal Info
+          </Button>
+        )}
       </Box>
     </Box>
   );

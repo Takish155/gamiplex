@@ -3,7 +3,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import { ListItemIcon, ListItemText, MenuItem } from "@mui/material";
 import React from "react";
 import { signOut } from "next-auth/react";
-import { menuItem } from "./_userStyles";
+import { menuItem } from "../_userStyles";
 
 const SignOutMenuItem = () => {
   return (

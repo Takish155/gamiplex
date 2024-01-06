@@ -9,8 +9,8 @@ const SettingSection = () => {
   return (
     <Grid item xs={12} md={8.5}>
       <Box sx={settingSection}>
-        <UpdatePersonalInfoForm />
         <ChangePasswordForm />
+        <UpdatePersonalInfoForm />
       </Box>
     </Grid>
   );

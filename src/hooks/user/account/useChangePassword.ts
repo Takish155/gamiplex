@@ -25,12 +25,22 @@ const useChangePassword = () => {
     onSuccess: () => {
       reset();
     },
+    onError: (error) => {
+      setMessage(error.message);
+    },
     onSettled: (response) => {
       setMessage(response!.message);
     },
   });
 
-  return { register, handleSubmit, errors, message, changePassword };
+  return {
+    register,
+    handleSubmit,
+    errors,
+    message,
+    changePassword,
+    setMessage,
+  };
 };
 
 export default useChangePassword;
