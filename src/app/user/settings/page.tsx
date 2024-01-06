@@ -4,6 +4,7 @@ import React from "react";
 import { settingSection } from "../_userStyles";
 import UpdatePersonalInfoForm from "./UpdatePersonalInfoForm";
 import ChangePasswordForm from "./ChangePasswordForm";
+import { Metadata } from "next";
 
 const SettingSection = () => {
   return (
@@ -17,3 +18,11 @@ const SettingSection = () => {
 };
 
 export default SettingSection;
+
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: "Settings | Gamiplex",
+    description:
+      "User settings page, where you can update your personal info and change password.",
+  };
+}

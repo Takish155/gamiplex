@@ -27,10 +27,10 @@ const GamePage = async ({ params }: { params: { id: string } }) => {
             <TrailerSection data={data} />
             <QuickDetails data={data} />
           </Box>
+          <GameGallerySection />
           <Box sx={sectionStyles} component="section">
             <GameDescription data={data} />
           </Box>
-          <GameGallerySection />
           <ComputerRequirements data={data} />
         </>
       ) : (

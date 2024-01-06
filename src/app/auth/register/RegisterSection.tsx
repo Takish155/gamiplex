@@ -1,16 +1,26 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { buttonBox, buttonStyle, loginForm, textField } from "../_authStyle";
 import useRegister from "@/hooks/user/account/useRegister";
 import { Alert, CircularProgress } from "@mui/material";
+import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 const RegisterSection = () => {
   const { register, errors, handleSubmit, onSubmit, message, loading } =
     useRegister();
+  const router = useRouter();
+  const session = useSession();
+  useEffect(() => {
+    if (session.status === "authenticated") {
+      router.push("/");
+    }
+  }, [session, router]);
+
   return (
     <Box
       component="form"

@@ -33,7 +33,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const genreName = params.id.charAt(0).toUpperCase() + params.id.slice(1);
   return {
-    title: `Discsover ${genreName} Games  | Gamiplex`,
+    title: `Discover ${genreName} Games  | Gamiplex`,
     description: `Discover ${genreName} games on Gamiplex. Find new games to play by browsing through our list of ${genreName} games.`,
   };
 }

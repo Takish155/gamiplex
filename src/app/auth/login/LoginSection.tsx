@@ -19,6 +19,8 @@ const LoginSection = () => {
     }
   }, [session, router]);
 
+  if (session.status === "loading") return null;
+
   return (
     <Box
       component="form"

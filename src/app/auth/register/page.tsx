@@ -9,6 +9,7 @@ import {
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import RegisterSection from "./RegisterSection";
+import { Metadata } from "next";
 
 const page = () => {
   return (
@@ -27,3 +28,11 @@ const page = () => {
 };
 
 export default page;
+
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: "Register | Gamiplex",
+    description:
+      "Sign-up to create your own Gamiplex account to be able to save your favorite games.",
+  };
+}
