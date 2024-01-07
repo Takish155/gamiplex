@@ -7,6 +7,9 @@
   <li>Get the info about the video game you desire to click on.</li>
   <li>Search video games by their keywords</li>
   <li>Sort video games by their rating, name, release date, etc...</li>
+  <li>User authentication(login/registration system)</li>
+  <li>Add video games you desire to your favorite game list.</li>
+  <li>Update your account's email, password, etc...</li>
 </ul>
 
 <h2>Mainly used library/framework</h2>
@@ -14,6 +17,9 @@
   <li>Typescript</li>
   <li>React</li>
   <li>NextJS</li>
+  <li>Prisma</li>
+  <li>NextAuth</li>
+  <li>MongoDB</li>
   <li>Material UI (UI Library)</li>
   <li>Axios (Fetching Data)</li>
   <li>Tanstack Query (Query / State Management)</li>
@@ -23,6 +29,6 @@
 <h2>Future Plans</h2>
 <ul>
   <li>Use framer motion to add animation when the games is loaded. ✅</li>
-  <li>Add authentication system (login/registration system)</li>
-  <li>Add favorite system for authenticated users</li>
+  <li>Add authentication system (login/registration system) ✅</li>
+  <li>Add favorite system for authenticated users ✅</li>
 </ul>
