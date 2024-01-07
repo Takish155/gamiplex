@@ -14,6 +14,7 @@ import {
   sectionStyles,
   sectionStylesAlt,
 } from "@/styles/gameInfoStyle";
+import GameGallerySection from "./sections/GameGallerySection";
 
 const GamePage = async ({ params }: { params: { id: string } }) => {
   const data = await getGameInfo(params.id);
@@ -26,6 +27,7 @@ const GamePage = async ({ params }: { params: { id: string } }) => {
             <TrailerSection data={data} />
             <QuickDetails data={data} />
           </Box>
+          <GameGallerySection />
           <Box sx={sectionStyles} component="section">
             <GameDescription data={data} />
           </Box>
@@ -39,6 +41,7 @@ const GamePage = async ({ params }: { params: { id: string } }) => {
               <GameDescription data={data} />
             </Box>
           </Box>
+          <GameGallerySection />
           <ComputerRequirements data={data} />
         </>
       )}

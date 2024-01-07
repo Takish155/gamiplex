@@ -34,7 +34,7 @@ const GameSection = ({
       animate="visible"
       transition={{ delay: index * 0.3, ease: "easeInOut", duration: 0.5 }}
     >
-      <Link href={`/games/${data.id}`}>
+      <Link href={`/games/${data.slug}`}>
         <Paper key={data.id} sx={paperStyle} elevation={6}>
           <>
             <Box sx={imageContainerStyle}>

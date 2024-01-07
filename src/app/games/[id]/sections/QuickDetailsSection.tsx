@@ -13,6 +13,7 @@ import {
   infoBackgroundImageStyle,
 } from "../styles/quickDetailsSectionStyles";
 import noImage from "@/../public/images/no-image.png";
+import AddToFavoriteSection from "./AddToFavoriteSection";
 
 const QuickDetails = async ({ data }: { data: FetchGameInfoType }) => {
   return (
@@ -55,10 +56,13 @@ const QuickDetails = async ({ data }: { data: FetchGameInfoType }) => {
       </Box>
       <Divider component="div" sx={infoDividerStyle} />
       <Box sx={infoStyleContainer}>
-        <Typography sx={infoHeadingStyle}>Genres</Typography>
+        <Typography sx={infoHeadingStyle}>ESRB Rating</Typography>
         <Typography sx={infoParagraphStyle}>
           {data.response.gameInfoResponse.esrb_rating?.name ?? "Unknown"}
         </Typography>
+      </Box>
+      <Box sx={{ display: "flex", flexDirection: "column" }}>
+        <AddToFavoriteSection data={data} />
       </Box>
     </Box>
   );

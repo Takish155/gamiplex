@@ -49,6 +49,21 @@ const NavBar = () => {
           <SortIcon sx={navIcon} />
         </IconButton>
       </Link>
+      <Link href="/user">
+        <IconButton
+          aria-label="link to discover page"
+          sx={{
+            borderRadius: "0",
+            backgroundColor: path.includes(
+              `${process.env.NEXT_PUBLIC_URL}/user`
+            )
+              ? "rgba(255, 255, 255, 0.08)"
+              : "",
+          }}
+        >
+          <PersonIcon sx={navIcon} />
+        </IconButton>
+      </Link>
     </Box>
   );
 };

@@ -22,3 +22,11 @@ html {
 ::-webkit-scrollbar-thumb:hover {
   background: #888; /* Darker thumb color when hovering */
 }
+
+a {
+  color: inherit; /* Resets the color */
+  text-decoration: none; /* Removes underline */
+  background-color: transparent; /* Removes background color */
+  border: none; /* Removes border */
+  outline: none; /* Removes outline */
+}

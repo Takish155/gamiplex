@@ -15,7 +15,7 @@ export const imageContainerStyle: SxProps = {
   width: "full",
   paddingTop: "75%",
   marginBottom: 5,
-  borderRadius: "3xl",
+  borderRadius: "1.5rem",
   overflow: "hidden",
 };
 
@@ -44,4 +44,20 @@ export const detailsTextStyle: SxProps = {
   display: "flex",
   alignItems: "center",
   gap: "0.3rem",
+};
+
+export const favoriteGameListContainer: SxProps = {
+  display: "flex",
+  flexWrap: "wrap",
+  justifyContent: "center",
+  gap: "3rem",
+};
+
+export const removeButtonContainer: SxProps = {
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  margin: "2rem auto",
+  gap: "1rem",
+  width: "100%",
 };
