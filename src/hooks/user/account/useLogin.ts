@@ -1,14 +1,16 @@
 import { LoginSchemaType, loginSchema } from "@/schema/loginSchemta";
+import { ActionMessage } from "@/types/actionMessage";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation } from "@tanstack/react-query";
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 const useLogin = () => {
-  const [message, setMessage] = useState("");
-  const router = useRouter();
+  const [message, setMessage] = useState<ActionMessage>({
+    message: "",
+    status: 0,
+  });
+  const [isLoading, setIsLoading] = useState(false);
   const {
     register,
     handleSubmit,
@@ -18,28 +20,34 @@ const useLogin = () => {
   });
 
   const onSubmit = async (data: LoginSchemaType) => {
+    setIsLoading(true);
     signIn("credentials", {
       email: data.email,
       password: data.password,
       redirect: false,
     }).then((res) => {
       if (!res?.ok) {
-        setMessage("Invalid credentials");
+        setMessage({
+          message: "Invalid credentials, please try again.",
+          status: 400,
+        });
+      } else {
+        setMessage({
+          message: "Login successful, redirecting...",
+          status: 200,
+        });
       }
+      setIsLoading(false);
     });
   };
-
-  const signInMutation = useMutation({
-    mutationFn: async ({ email, password }: LoginSchemaType) =>
-      onSubmit({ email, password }),
-  });
 
   return {
     register,
     handleSubmit,
-    signInMutation,
+    onSubmit,
     errors,
     message,
+    isLoading,
   };
 };
 export default useLogin;

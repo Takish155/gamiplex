@@ -1,24 +1,28 @@
 import removeFavoriteGameAction from "@/actions/removeFavoriteGameAction";
+import { ActionMessage } from "@/types/actionMessage";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 
 const useRemoveToFavoriteButton = () => {
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState<ActionMessage>({
+    message: "",
+    status: 0,
+  });
 
   const queryClient = useQueryClient();
   const removeFavorite = useMutation({
     mutationFn: async ({ gameId }: { gameId: number }) =>
       await removeFavoriteGameAction(gameId),
-    onSuccess: () => {
-      setMessage("Game removed from your favorite list");
-    },
-    onError: (error) => {
-      setMessage(error.message);
-    },
-    onSettled: () => {
-      queryClient.invalidateQueries({
-        queryKey: ["favoriteGames"],
+    onSettled: (response) => {
+      setMessage({
+        message: response!.message,
+        status: response!.status,
       });
+      if (response?.status === 200) {
+        queryClient.invalidateQueries({
+          queryKey: ["favoriteGames"],
+        });
+      }
     },
   });
 

@@ -13,7 +13,7 @@ export const loginSection: SxProps = {
   width: "80%",
   maxWidth: "650px",
   minWidth: "280px",
-  borderRadius: "3%",
+  borderRadius: "2%",
   "@media (max-width: 600px)": {
     marginTop: "2rem",
     width: "95%",

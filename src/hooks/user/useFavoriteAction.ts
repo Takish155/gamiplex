@@ -1,10 +1,14 @@
 import addFavoriteGameAction from "@/actions/addFavoriteGameAction";
+import { ActionMessage } from "@/types/actionMessage";
 import { FetchGameInfoType } from "@/types/getGameInfoType";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 
 const useFavoriteAction = (data: FetchGameInfoType) => {
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState<ActionMessage>({
+    message: "",
+    status: 200,
+  });
   const queryClient = useQueryClient();
 
   const addToFavorite = useMutation({
@@ -16,16 +20,16 @@ const useFavoriteAction = (data: FetchGameInfoType) => {
         released: data.response.gameInfoResponse.released,
         rating: data.response.gameInfoResponse.rating,
       }),
-    onSuccess: () => {
-      setMessage("Game added to your favorite list");
-    },
-    onError: (error) => {
-      setMessage(error.message);
-    },
-    onSettled: () => {
-      queryClient.invalidateQueries({
-        queryKey: ["favoriteGames"],
+    onSettled: (response) => {
+      setMessage({
+        message: response?.message!,
+        status: response?.status!,
       });
+      if (response?.status === 200) {
+        queryClient.invalidateQueries({
+          queryKey: ["favoriteGames"],
+        });
+      }
     },
   });
 

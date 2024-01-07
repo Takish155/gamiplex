@@ -33,7 +33,11 @@ const FavoriteGameSection = ({
   gameRating: number;
   isPending: boolean;
   removeFavorite: UseMutationResult<
-    never,
+    | {
+        message: string;
+        status: number;
+      }
+    | undefined,
     Error,
     {
       gameId: number;

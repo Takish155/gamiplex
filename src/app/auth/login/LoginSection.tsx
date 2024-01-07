@@ -8,7 +8,7 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
 const LoginSection = () => {
-  const { register, errors, handleSubmit, message, signInMutation } =
+  const { register, errors, handleSubmit, message, onSubmit, isLoading } =
     useLogin();
   const session = useSession();
   const router = useRouter();
@@ -19,26 +19,17 @@ const LoginSection = () => {
     }
   }, [session, router]);
 
-  if (session.status === "loading") return null;
-
   return (
     <Box
       component="form"
       sx={loginForm}
       onSubmit={handleSubmit((data) => {
-        signInMutation.mutate({
-          email: data.email,
-          password: data.password,
-        });
+        onSubmit(data);
       })}
     >
-      {message && (
-        <Alert
-          severity={
-            message === "Success login into your account" ? "success" : "error"
-          }
-        >
-          {message}
+      {message.message && (
+        <Alert severity={message.status === 200 ? "success" : "error"}>
+          {message.message}
         </Alert>
       )}
       <TextField
@@ -60,7 +51,7 @@ const LoginSection = () => {
         helperText={errors.password ? errors.password.message : ""}
       />
       <Box sx={buttonBox}>
-        {signInMutation.isPending ? (
+        {isLoading ? (
           <CircularProgress />
         ) : (
           <Button type="submit" variant="contained" sx={buttonStyle}>

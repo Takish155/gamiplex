@@ -41,15 +41,9 @@ const AddToFavoriteSection = ({ data }: { data: FetchGameInfoType }) => {
         >
           Add to Favorites
         </Button>
-        {message && (
-          <Alert
-            severity={
-              message === "Game added to your favorite list"
-                ? "success"
-                : "error"
-            }
-          >
-            {message}
+        {message.message && (
+          <Alert severity={message.status === 200 ? "success" : "error"}>
+            {message.message}
           </Alert>
         )}
       </>

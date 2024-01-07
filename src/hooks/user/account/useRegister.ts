@@ -16,25 +16,39 @@ const useRegister = () => {
   } = useForm<RegistrationSchemaType>({
     resolver: zodResolver(registrationSchema),
   });
-  const [message, setMessage] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState({
+    message: "",
+    status: 0,
+  });
+  const [isLoading, setIsLoading] = useState(false);
 
   const onSubmit = async (data: RegistrationSchemaType) => {
-    setLoading(true);
+    setIsLoading(true);
     const response = await registerAction(data);
-    setMessage(response.message);
-    if (response.message === "Account created successfully... signing in....") {
+    setMessage({
+      message: response.message,
+      status: response.status,
+    });
+    if (response.status === 200) {
       signIn("credentials", {
         email: data.email,
         password: data.password,
-        callbackUrl: "/",
+        callbackUrl: "/user",
       });
     } else {
-      setLoading(false);
+      setIsLoading(false);
     }
   };
 
-  return { register, handleSubmit, errors, message, onSubmit, loading };
+  return {
+    register,
+    handleSubmit,
+    errors,
+    message,
+    onSubmit,
+    isLoading,
+    setMessage,
+  };
 };
 
 export default useRegister;

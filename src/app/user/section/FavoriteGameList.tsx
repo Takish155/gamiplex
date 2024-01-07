@@ -1,34 +1,13 @@
 "use client";
 
-import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import showFavoriteAction from "@/actions/showFavoriteAction";
-import {
-  Alert,
-  Box,
-  Button,
-  CircularProgress,
-  Paper,
-  Typography,
-} from "@mui/material";
-import StarIcon from "@mui/icons-material/Star";
+import { Alert, Box, CircularProgress, Typography } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
-import Image from "next/image";
 import React from "react";
-import {
-  detailsContainerStyle,
-  detailsTextStyle,
-  headingStyle,
-  imageContainerStyle,
-  infoContainerStyle,
-  paperStyle,
-  removeButtonContainer,
-  favoriteGameListContainer,
-} from "@/styles/gameSectionStyle";
-import noImage from "@/../public/images/no-image.png";
+import { favoriteGameListContainer } from "@/styles/gameSectionStyle";
 import { loadingPageContainer } from "../_userStyles";
 import useRemoveToFavoriteButton from "@/hooks/user/useRemoveToFavoriteButton";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import FavoriteGameSection from "./FavoriteGameSection";
 
 const FavoriteGameList = () => {
@@ -37,7 +16,6 @@ const FavoriteGameList = () => {
     queryFn: () => showFavoriteAction(),
   });
   const { message, removeFavorite, setMessage } = useRemoveToFavoriteButton();
-  const router = useRouter();
 
   if (isLoading) {
     return (
@@ -49,17 +27,18 @@ const FavoriteGameList = () => {
 
   return (
     <>
-      {message && (
+      {message.message && (
         <Alert
           sx={{ marginBottom: "2rem" }}
-          severity={
-            message === "Game removed from your favorite list"
-              ? "success"
-              : "error"
+          severity={message.status === 200 ? "success" : "error"}
+          onClose={() =>
+            setMessage({
+              status: 0,
+              message: "",
+            })
           }
-          onClose={() => setMessage("")}
         >
-          {message}
+          {message.message}
         </Alert>
       )}
       <Box sx={favoriteGameListContainer}>

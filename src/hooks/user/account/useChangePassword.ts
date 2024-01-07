@@ -3,13 +3,17 @@ import {
   ChangePasswordSchemaType,
   changePasswordSchema,
 } from "@/schema/changePasswordSchema";
+import { ActionMessage } from "@/types/actionMessage";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 const useChangePassword = () => {
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState<ActionMessage>({
+    message: "",
+    status: 200,
+  });
 
   const {
     register,
@@ -22,14 +26,14 @@ const useChangePassword = () => {
   const changePassword = useMutation({
     mutationFn: async ({ password, newPassword }: ChangePasswordSchemaType) =>
       changePasswordAction(password, newPassword),
-    onSuccess: () => {
-      reset();
-    },
-    onError: (error) => {
-      setMessage(error.message);
-    },
     onSettled: (response) => {
-      setMessage(response!.message);
+      setMessage({
+        message: response?.message!,
+        status: response?.status!,
+      });
+      if (response?.status === 200) {
+        reset();
+      }
     },
   });
 
