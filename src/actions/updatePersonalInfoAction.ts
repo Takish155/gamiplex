@@ -32,13 +32,14 @@ const updatePersonalInfoAction = async (
 
   const passwordMatch = await bcrypt.compare(password, user.hashedPassword!);
 
-  if (!passwordMatch) {
-    throw new Error("Password doesn't match");
-  }
+  if (!passwordMatch) return { message: "Password is incorrect", status: 400 };
 
-  if (user?.email === changedEmail && user?.name === changedName) {
-    throw new Error("No changes were made due to having same data.");
-  }
+  if (user?.email === changedEmail && user?.name === changedName)
+    return {
+      message: "No changes were made due to having same data.",
+      status: 400,
+      isChangedEmail: false,
+    };
 
   await prisma.user.update({
     where: { email: session?.user?.email! },
@@ -49,7 +50,14 @@ const updatePersonalInfoAction = async (
   });
 
   if (user.email === changedEmail) {
-    return { message: "Name updated successfully" };
+    return { message: "Name updated successfully", status: 200 };
+  } else {
+    return {
+      message:
+        "Personal info updated successfully, signing out in 5 seconds due to email change.",
+      status: 200,
+      isChangedEmail: true,
+    };
   }
 };
 

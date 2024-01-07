@@ -14,20 +14,25 @@ const changePasswordAction = async (
     where: { email: session!.user!.email! },
   });
   if (!user) {
-    throw new Error("User not found");
+    return { message: "User not found", status: 400 };
   }
 
   const passwordMatch = await bcrypt.compare(
     currentPassword,
     user.hashedPassword!
   );
+
   if (!passwordMatch) {
-    throw new Error("Password doesn't match!");
+    return { message: "Current password is incorrect", status: 400 };
   }
 
   const passwordSame = await bcrypt.compare(newPassword, user.hashedPassword!);
+
   if (passwordSame) {
-    throw new Error("New password can't be the same as old password!");
+    return {
+      message: "New password can't be the same as old password",
+      status: 400,
+    };
   }
 
   const hashedPassword = await bcrypt.hash(newPassword, 10);
@@ -37,7 +42,7 @@ const changePasswordAction = async (
     data: { hashedPassword: hashedPassword },
   });
 
-  return { message: "Password changed successfully" };
+  return { message: "Password changed successfully", status: 200 };
 };
 
 export default changePasswordAction;

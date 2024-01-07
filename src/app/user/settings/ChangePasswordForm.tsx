@@ -40,14 +40,17 @@ const ChangePasswordForm = () => {
     >
       <Typography sx={accordionHeading}>Change Password</Typography>
       <Box sx={formContainer}>
-        {message && (
+        {message.message && (
           <Alert
-            onClose={() => setMessage("")}
-            severity={
-              message === "Password changed successfully" ? "success" : "error"
+            onClose={() =>
+              setMessage({
+                status: 200,
+                message: "",
+              })
             }
+            severity={message.status === 200 ? "success" : "error"}
           >
-            {message}
+            {message.message}
           </Alert>
         )}
         <TextField

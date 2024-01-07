@@ -11,13 +11,20 @@ import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 
 const RegisterSection = () => {
-  const { register, errors, handleSubmit, onSubmit, message, loading } =
-    useRegister();
+  const {
+    register,
+    errors,
+    handleSubmit,
+    onSubmit,
+    message,
+    isLoading,
+    setMessage,
+  } = useRegister();
   const router = useRouter();
   const session = useSession();
   useEffect(() => {
     if (session.status === "authenticated") {
-      router.push("/");
+      router.push("/user");
     }
   }, [session, router]);
 
@@ -29,15 +36,17 @@ const RegisterSection = () => {
         onSubmit(data);
       })}
     >
-      {message && (
+      {message.message && (
         <Alert
-          severity={
-            message === "Account created successfully... signing in...."
-              ? "success"
-              : "error"
+          severity={message.status === 200 ? "success" : "error"}
+          onClose={() =>
+            setMessage({
+              status: 0,
+              message: "",
+            })
           }
         >
-          {message}
+          {message.message}
         </Alert>
       )}
       <TextField
@@ -77,7 +86,7 @@ const RegisterSection = () => {
         {...register("passwordAgain")}
       />
       <Box sx={buttonBox}>
-        {loading ? (
+        {isLoading ? (
           <CircularProgress />
         ) : (
           <Button type="submit" variant="contained" sx={buttonStyle}>

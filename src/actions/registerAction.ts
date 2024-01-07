@@ -16,7 +16,7 @@ const registerAction = async (formData: RegistrationSchemaType) => {
   });
 
   if (!data.success) {
-    return { message: "Registration failed" };
+    return { message: "Registration failed", status: 400 };
   }
 
   const existingEmail = await prisma.user.findUnique({
@@ -24,7 +24,10 @@ const registerAction = async (formData: RegistrationSchemaType) => {
   });
 
   if (existingEmail) {
-    return { message: "Email already exist, please try another email." };
+    return {
+      message: "Email already exist, please try another email.",
+      status: 400,
+    };
   }
 
   const hashedPassword = await bcrypt.hash(data.data.password, 10);
@@ -37,7 +40,10 @@ const registerAction = async (formData: RegistrationSchemaType) => {
     },
   });
 
-  return { message: "Account created successfully... signing in...." };
+  return {
+    message: "Account created successfully... signing in....",
+    status: 200,
+  };
 };
 
 export default registerAction;

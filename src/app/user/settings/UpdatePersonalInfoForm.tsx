@@ -57,16 +57,17 @@ const UpdatePersonalInfoForm = () => {
         <Alert severity="info">
           You need to log in again after changing your email...
         </Alert>
-        {message && (
+        {message.message && (
           <Alert
-            onClose={() => setMessage("")}
-            severity={
-              message === "Personal info updated successfully!"
-                ? "success"
-                : "error"
+            onClose={() =>
+              setMessage({
+                message: "",
+                status: 0,
+              })
             }
+            severity={message.status === 200 ? "success" : "error"}
           >
-            {message}
+            {message.message}
           </Alert>
         )}
         <TextField

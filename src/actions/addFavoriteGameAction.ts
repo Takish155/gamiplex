@@ -2,7 +2,6 @@
 
 import { z } from "zod";
 import prisma from "../../prisma/prisma";
-import { revalidatePath } from "next/cache";
 import { getServerSession } from "next-auth";
 
 type AddFavoriteDataType = {
@@ -32,13 +31,13 @@ const addFavoriteGameAction = async (data: AddFavoriteDataType) => {
   });
 
   if (!validateData.success) {
-    return { message: "Adding to favorite failed" };
+    return { message: "Adding to favorite failed", status: 400 };
   }
   const user = await prisma.user.findUnique({
     where: { email: session?.user?.email! },
   });
   if (!user) {
-    return { message: "Adding to favorite failed" };
+    return { message: "Adding to favorite failed", status: 400 };
   }
 
   const existingGame = await prisma.favoriteGames.findFirst({
@@ -46,7 +45,7 @@ const addFavoriteGameAction = async (data: AddFavoriteDataType) => {
   });
 
   if (existingGame) {
-    throw new Error("Game already in your favorite list");
+    return { message: "Game already in favorite", status: 400 };
   }
 
   await prisma.user.update({
@@ -64,7 +63,7 @@ const addFavoriteGameAction = async (data: AddFavoriteDataType) => {
     },
   });
 
-  revalidatePath("/user");
+  return { message: "Game added to favorite", status: 200 };
 };
 
 export default addFavoriteGameAction;
