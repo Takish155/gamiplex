@@ -7,6 +7,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import registerAction from "@/actions/registerAction";
 import { signIn } from "next-auth/react";
 import { useState } from "react";
+import { useMutation } from "@tanstack/react-query";
+
+export type Message = {
+  message: string;
+  status: number;
+};
 
 const useRegister = () => {
   const {
@@ -20,23 +26,28 @@ const useRegister = () => {
     message: "",
     status: 0,
   });
-  const [isLoading, setIsLoading] = useState(false);
+  const mutation = useMutation({
+    mutationFn: async (data: RegistrationSchemaType) =>
+      await registerAction(data),
+    onSuccess: (response) => {
+      setMessage(response);
+    },
+    onError: (error) => {
+      setMessage({
+        message: error.message,
+        status: 400,
+      });
+    },
+  });
 
   const onSubmit = async (data: RegistrationSchemaType) => {
-    setIsLoading(true);
-    const response = await registerAction(data);
-    setMessage({
-      message: response.message,
-      status: response.status,
-    });
-    if (response.status === 200) {
+    mutation.mutate(data);
+    if (mutation.isSuccess) {
       signIn("credentials", {
         email: data.email,
         password: data.password,
         callbackUrl: "/user",
       });
-    } else {
-      setIsLoading(false);
     }
   };
 
@@ -46,8 +57,8 @@ const useRegister = () => {
     errors,
     message,
     onSubmit,
-    isLoading,
     setMessage,
+    mutation,
   };
 };
 

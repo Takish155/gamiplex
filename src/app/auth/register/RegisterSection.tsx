@@ -17,8 +17,8 @@ const RegisterSection = () => {
     handleSubmit,
     onSubmit,
     message,
-    isLoading,
     setMessage,
+    mutation,
   } = useRegister();
   const router = useRouter();
   const session = useSession();
@@ -86,7 +86,7 @@ const RegisterSection = () => {
         {...register("passwordAgain")}
       />
       <Box sx={buttonBox}>
-        {isLoading ? (
+        {mutation.isPending ? (
           <CircularProgress />
         ) : (
           <Button type="submit" variant="contained" sx={buttonStyle}>

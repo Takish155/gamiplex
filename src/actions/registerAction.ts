@@ -8,42 +8,50 @@ import {
 } from "@/schema/registrationSchema";
 
 const registerAction = async (formData: RegistrationSchemaType) => {
-  const data = registrationSchema.safeParse({
-    name: formData.name,
-    email: formData.email,
-    password: formData.password,
-    passwordAgain: formData.passwordAgain,
-  });
+  try {
+    const data = registrationSchema.safeParse({
+      name: formData.name,
+      email: formData.email,
+      password: formData.password,
+      passwordAgain: formData.passwordAgain,
+    });
 
-  if (!data.success) {
-    return { message: "Registration failed", status: 400 };
-  }
+    if (!data.success) throw new Error("Invalid data");
 
-  const existingEmail = await prisma.user.findUnique({
-    where: { email: data.data.email },
-  });
+    const existingEmail = await prisma.user.findUnique({
+      where: { email: data.data.email },
+    });
 
-  if (existingEmail) {
+    if (existingEmail)
+      throw new Error("Email already exist, please try another email.");
+
+    const hashedPassword = await bcrypt.hash(data.data.password, 10);
+
+    await prisma.user.create({
+      data: {
+        name: data.data.name,
+        email: data.data.email,
+        hashedPassword: hashedPassword,
+      },
+    });
+
     return {
-      message: "Email already exist, please try another email.",
-      status: 400,
+      message: "Account created successfully... signing in....",
+      status: 200,
     };
+  } catch (error) {
+    if (error instanceof Error) {
+      return {
+        message: error.message,
+        status: 400,
+      };
+    } else {
+      return {
+        message: "Something went wrong",
+        status: 400,
+      };
+    }
   }
-
-  const hashedPassword = await bcrypt.hash(data.data.password, 10);
-
-  await prisma.user.create({
-    data: {
-      name: data.data.name,
-      email: data.data.email,
-      hashedPassword: hashedPassword,
-    },
-  });
-
-  return {
-    message: "Account created successfully... signing in....",
-    status: 200,
-  };
 };
 
 export default registerAction;
