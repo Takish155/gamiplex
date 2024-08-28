@@ -40,6 +40,7 @@ const registerAction = async (formData: RegistrationSchemaType) => {
       status: 200,
     };
   } catch (error) {
+    
     if (error instanceof Error) {
       return {
         message: error.message,
